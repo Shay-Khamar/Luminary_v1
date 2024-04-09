@@ -1,14 +1,101 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, Dimensions } from 'react-native';
+import {useEffect, useState} from 'react';
+import 'react-native-gesture-handler';
+import { NavigationContainer, getFocusedRouteNameFromRoute  } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { PaperProvider } from 'react-native-paper';
+import * as ScreenOrientation from 'expo-screen-orientation'
 
-export default function App() {
+import { DimensionsProvider } from './Components/misc/DimensionContext';
+
+
+import Home from './Components/Screens/BottomTabs/Home';
+import ExampleScreen from './Components/Screens/Stacks/ExampleScreen';
+import SomethingElse from './Components/Screens/BottomTabs/SomethingElse';
+import CameraScreen from './Components/Displays/CameraScreen';
+import ReadingCatalogue from './Components/Screens/Stacks/ReadingCatalogue';
+import Exercise1 from './Components/Screens/Stacks/Exercise1';
+
+const Stack = createStackNavigator();
+const Tab = createMaterialBottomTabNavigator();
+
+const getTabBarVisibility = (route) => {
+  const routeName = getFocusedRouteNameFromRoute(route) ?? '';
+  return !['CameraScreen'].includes(routeName);
+}
+
+
+function StackNavigator() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen name="HomeTab" component={TabNavigator} />
+      <Stack.Screen options={{ headerShown: false}} name="CameraScreen" component={CameraScreen} />
+      <Stack.Screen name="ExampleScreen" component={ExampleScreen} />
+      <Stack.Screen options={{headerShown: false}} name="ReadingCatalogue" component={ReadingCatalogue} />
+      <Stack.Screen options={{headerShown: false}} name="Exercise1" component={Exercise1} />
+    </Stack.Navigator>
   );
 }
+
+function TabNavigator() {
+  return (
+    <Tab.Navigator
+    screenOptions={({route}) => ({
+      headerStyle: {
+        backgroundColor: 'blue',
+        height : "6%",
+
+      },
+      tabBarStyle : {
+        display: getTabBarVisibility(route) ? "none" : "flex",
+      }  
+    })}
+    >
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="SomethingElse" component={SomethingElse} />
+    </Tab.Navigator>
+  );
+};
+
+
+
+
+export default function App() {
+  const [orienation, setOrientation] = useState(1);
+  const [dimensions, setDimensions] = useState({ width: Dimensions.get('window').width, height: Dimensions.get('window').height });
+
+
+  useEffect(() => {
+    LockOrientation();
+  }, []);
+
+  const LockOrientation = async () => {
+    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+    const o = await ScreenOrientation.getOrientationAsync();
+    setOrientation(o);
+  };
+
+  useEffect(() => {
+    const update = () => {
+      setDimensions({ width: Dimensions.get('window').width, height: Dimensions.get('window').height });
+    };
+  
+    Dimensions.addEventListener('change', update);
+    return () => Dimensions.removeEventListener('change', update);
+  }, []);
+
+  return (
+    <PaperProvider>
+    <NavigationContainer>
+     <StackNavigator />
+      <StatusBar style="auto" />
+    </NavigationContainer>
+    </PaperProvider>
+  );
+}
+AppRegistry.registerComponent('App', () => App);
 
 const styles = StyleSheet.create({
   container: {
