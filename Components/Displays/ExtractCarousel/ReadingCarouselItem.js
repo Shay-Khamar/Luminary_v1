@@ -8,14 +8,11 @@ export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
 
 
-const ReadingCarouselItem = ({item, index}) => {
-  const navigation = useNavigation(); 
+const ReadingCarouselItem = ({item, index, navigation}) => {
+ 
 
-  const handlePress = () => {
-    navigation.navigate('Exercise1', { Extract: item }); 
-  }
   return (
-    <TouchableOpacity style={styles.container} key={index}  onPress={handlePress}>
+    <TouchableOpacity style={styles.container} key={index}  onPress={() => navigation.navigate('Exercise1', { Extract: item })} >
       <Text style={styles.header}>{item.title}</Text>
       <View style={styles.something}>
       <Text>{item.difficultyLevel}</Text>
