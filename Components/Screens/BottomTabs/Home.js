@@ -19,7 +19,7 @@ const ExtractSelectScreen = () => {
 }
   return (
     <View style={styles.container}>
-      <Text>This what the home screen looks like</Text>
+      <Text style={styles.textStyle}>This what the home screen looks like</Text>
       <View style={styles.buttonLayout}>
       <ThemedButton name="bruce" type="primary" style={styles.button} width={100} onPressOut={toCamera} backgroundColor={"#000"} >Launch Camera </ThemedButton>
       <ThemedButton name="bruce" type="primary" style={styles.button} width={100} onPressOut={ExtractSelectScreen} backgroundColor={"purple"} >Exercise 1#</ThemedButton>
@@ -42,5 +42,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 10,
 
-  } 
+  },
+
+  textStyle : {
+    fontSize: 20,
+    padding: 10,
+    fontFamily: 'OpenDyslexic',
+  },
 })

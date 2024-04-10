@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { AppRegistry, StyleSheet, Text, View, Dimensions } from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, Dimensions, ActivityIndicator } from 'react-native';
 import {useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer, getFocusedRouteNameFromRoute  } from '@react-navigation/native';
@@ -7,6 +7,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { PaperProvider } from 'react-native-paper';
 import * as ScreenOrientation from 'expo-screen-orientation'
+import { useFonts } from 'expo-font';
+
 
 import { DimensionsProvider } from './Components/misc/DimensionContext';
 
@@ -65,6 +67,16 @@ function TabNavigator() {
 export default function App() {
   const [orienation, setOrientation] = useState(1);
   const [dimensions, setDimensions] = useState({ width: Dimensions.get('window').width, height: Dimensions.get('window').height });
+
+  let [fontsLoaded] = useFonts({
+    'CourierPrime': require('./assets/fonts/CourierPrime-Regular.ttf'),
+    'Helvetica': require('./assets/fonts/Helvetica.ttf'),
+    'Lexend': require('./assets/fonts/Lexend-VariableFont_wght.ttf'),
+    'OpenDyslexic': require('./assets/fonts/OpenDyslexic3-Regular.ttf'),
+    'OpenSans': require('./assets/fonts/OpenSans-Regular.ttf'),
+  });
+
+
 
 
   useEffect(() => {
