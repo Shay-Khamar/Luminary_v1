@@ -19,7 +19,7 @@ const ExtractSelectScreen = () => {
 }
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>This what the home screen looks like</Text>
+      <Text style={styles.textStyle}>This is what the home screen looks like</Text>
       <View style={styles.buttonLayout}>
       <ThemedButton name="bruce" type="primary" style={styles.button} width={100} onPressOut={toCamera} backgroundColor={"#000"} >Launch Camera </ThemedButton>
       <ThemedButton name="bruce" type="primary" style={styles.button} width={100} onPressOut={ExtractSelectScreen} backgroundColor={"purple"} >Exercise 1#</ThemedButton>

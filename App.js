@@ -76,6 +76,7 @@ export default function App() {
     'OpenSans': require('./assets/fonts/OpenSans-Regular.ttf'),
   });
 
+  
 
 
 
@@ -97,6 +98,11 @@ export default function App() {
     Dimensions.addEventListener('change', update);
     return () => Dimensions.removeEventListener('change', update);
   }, []);
+
+  if (!fontsLoaded) {
+    return <ActivityIndicator size="large" color="#0000ff" />; // Or any loading indicator
+  }
+
 
   return (
     <PaperProvider>

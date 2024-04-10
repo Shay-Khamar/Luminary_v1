@@ -3,6 +3,7 @@ import React from 'react';
 import { useRoute } from '@react-navigation/native';
 import { FontProvider } from '../../misc/FontContext';
 import CustomText from '../../misc/CustomText';
+import FontDropDown from '../../Displays/FontDropDown';
 
 const Exercise1 = () => {
   const route = useRoute();
@@ -12,11 +13,13 @@ const Exercise1 = () => {
   const paragraphs = item?.content.split('\n\n');
 
   return (
+    <FontProvider>
     <View style={styles.container}>
+      <FontDropDown/>
       <Text style={styles.header}>Exercise 1 Screen</Text>
       <View style={styles.centeredBoxContainer}>
       <View style={styles.boxContainer}>
-      <FontProvider>
+      
     <ScrollView contentContainerStyle={styles.extractContainer} fadingEdgeLength={2} scrollEnabled={true}>
       {paragraphs.map((paragraph, index) => (
         <CustomText key={index} style={styles.paragraph}>
@@ -24,10 +27,10 @@ const Exercise1 = () => {
         </CustomText>
       ))}
     </ScrollView>
+    </View>
+    </View>
+    </View>
     </FontProvider>
-    </View>
-    </View>
-    </View>
   );
 };
 
