@@ -1,14 +1,33 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Button } from 'react-native'
+import React, { useState, useEffect, useRef } from 'react';
+
 
 const SomethingElse = () => {
+
+
   return (
-    <View>
-      <Text>SomethingElse</Text>
+    <View style={styles.container}>      
     </View>
   )
 }
 
 export default SomethingElse
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+
+  container : {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  DialogText: {
+    fontSize: 20,
+    padding: 10,
+    paddingBottom: 20,
+  },
+
+  subheading: {
+    fontWeight: 'bold',
+  }
+})
