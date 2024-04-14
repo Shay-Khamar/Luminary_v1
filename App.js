@@ -19,6 +19,7 @@ import SomethingElse from './Components/Screens/BottomTabs/SomethingElse';
 import CameraScreen from './Components/Displays/CameraScreen';
 import ReadingCatalogue from './Components/Screens/Stacks/ReadingCatalogue';
 import Exercise1 from './Components/Screens/Stacks/Exercise1';
+import ResultScreen from './Components/Screens/Stacks/ResultScreen';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -37,6 +38,7 @@ function StackNavigator() {
       <Stack.Screen name="ExampleScreen" component={ExampleScreen} />
       <Stack.Screen options={{headerShown: false}} name="ReadingCatalogue" component={ReadingCatalogue} />
       <Stack.Screen options={{headerShown: false}} name="Exercise1" component={Exercise1} />
+      <Stack.Screen options={{headerShown: false}} name="ResultScreen" component={ResultScreen} />
     </Stack.Navigator>
   );
 }

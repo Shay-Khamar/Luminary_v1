@@ -1,4 +1,4 @@
-import { StyleSheet, Text, ScrollView, View, Button } from 'react-native';
+import { StyleSheet, Text, ScrollView, View, Button, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { FontProvider } from '../../misc/FontContext';
@@ -7,6 +7,14 @@ import FontDropDown from '../../Displays/FontDropDown';
 import {  Dialog, Portal, } from 'react-native-paper';
 import DialogBoxComponent from '../../Displays/DialogBoxComponent';
 import * as Speech from 'expo-speech';
+import { useNavigation } from '@react-navigation/native';
+
+
+import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+
+
+
 
 const TextContent = {
   intro: " Notice a small recording indicator at the bottom left of your screen? It's there because we're gathering insights to make experiences like yours even better. Not comfortable with sharing? No worries, feel free to opt out anytime.",
@@ -16,6 +24,13 @@ const TextContent = {
 };
 
 const Exercise1 = () => {
+
+  const navigation = useNavigation();
+
+  navResultScreen = () => {
+    navigation.navigate('ResultScreen');
+  }
+
   const route = useRoute();
   const item = route.params?.Extract;
   // Split the content by newline characters to separate paragraphs
@@ -45,7 +60,7 @@ const Exercise1 = () => {
     <>
 
     <DialogBoxComponent visible={visible} onDismiss={hideDialog} Title={'Just Before Start'}>
-      <Button title="Read Text Aloud" onPress={readTextAloud} />
+      <TouchableOpacity onPress={readTextAloud}><FontAwesome name="volume-up" size={24} color="black" /></TouchableOpacity>
       <Text style={styles.DialogText}>
       <Text style={styles.subheading}>Your Journey, Your Control:</Text>{TextContent.intro}
       </Text>
@@ -83,6 +98,7 @@ const Exercise1 = () => {
     </ScrollView>
     </View>
     </View>
+    <TouchableOpacity onPress={navResultScreen} style={styles.tester}><Ionicons name="checkmark-circle" size={50} color="black" /></TouchableOpacity>
     </View>
     </FontProvider>
     </>
@@ -96,7 +112,17 @@ const styles = StyleSheet.create({
   // That way I can add the custom font drop down menu from the top of the screen.
   // Create the timer shouldn't be too hard many examples online.
   container: {
-    flex: 1
+    flex: 1,
+    position: 'relative',
+  },
+
+  tester: {
+    position: 'absolute', // Position it relative to the container's boundaries
+    right: 20, // Distance from the right edge of the container
+    bottom: 20, // Distance from the bottom edge of the container
+    justifyContent: 'center',
+    alignItems: 'center',
+
   },
 
   header: {
