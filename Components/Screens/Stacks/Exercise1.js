@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import CameraScreen from '../../Displays/CameraScreen';
 import { useRecording } from '../../misc/RecordingContext';
 import ComprehensionWindow from '../../Displays/ComprehensionWindow';
+import  AwesomeButton  from 'react-native-really-awesome-button';
 
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -30,6 +31,9 @@ const Exercise1 = () => {
 
   const { cameraMinimized } = useRecording();
 
+  const [showContent, setShowContent] = useState(true);
+  const [visible, setVisible] = useState(false);
+
 
   const navigation = useNavigation();
 
@@ -37,12 +41,16 @@ const Exercise1 = () => {
     navigation.navigate('ResultScreen');
   }
 
+  finishFunction = () => {
+    setShowContent(false);
+  }
+
   const route = useRoute();
   const item = route.params?.Extract;
   // Split the content by newline characters to separate paragraphs
   const paragraphs = item?.content.split('\n\n');
 
-  const [visible, setVisible] = useState(false);
+ 
 
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
@@ -101,6 +109,7 @@ const Exercise1 = () => {
       <FontDropDown />
       </View>
       <View style={styles.centeredBoxContainer}>
+        { showContent && (
       <View style={styles.boxContainer}>
       
     <ScrollView contentContainerStyle={styles.extractContainer} fadingEdgeLength={2} scrollEnabled={true}>
@@ -111,9 +120,15 @@ const Exercise1 = () => {
       ))}
     </ScrollView>
     </View>
+    )}
+    {!showContent && (
     <ComprehensionWindow item={item} />
+    )}
+    <View style={{flex: 1}}></View>
+    {showContent && (
+    <AwesomeButton onPressIn={finishFunction} width={300}>Finish</AwesomeButton>
+    )}
     </View>
-    <TouchableOpacity onPress={navResultScreen} style={styles.tester}><Ionicons name="checkmark-circle" size={50} color="black" /></TouchableOpacity>
     </View>
     </FontProvider>
 
@@ -181,13 +196,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5, // For Android shadow effect
-    borderRadius: 1
+    borderRadius: 1,
   },
 
   centeredBoxContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: 10,
   },
 
   DialogText: {
@@ -199,4 +215,8 @@ const styles = StyleSheet.create({
   subheading: {
     fontWeight: 'bold',
   },
+
+  trash : {
+    algihtItems: 'flex-end',
+  }
 });
