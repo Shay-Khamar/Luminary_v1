@@ -13,7 +13,8 @@ const ExtractCatalogue = [
           "It was the oldest map ever discovered.",
           "It showed the locations of hidden, invisible cities.",
           "It was made entirely of gold."
-        ]
+        ],
+        "answer": "It showed the locations of hidden, invisible cities."
       },
       {
         "question": "How did Alex discover the Map of Invisible Cities?",
@@ -21,7 +22,8 @@ const ExtractCatalogue = [
           "By decoding a secret message.",
           "Hidden between the pages of an ancient atlas in a bookshop.",
           "It was given as a gift from a mysterious stranger."
-        ]
+        ],
+        "answer": "Hidden between the pages of an ancient atlas in a bookshop."
       },
       {
         "question": "What was one of the cities Alex visited?",
@@ -29,7 +31,8 @@ const ExtractCatalogue = [
           "A city that could only be entered through dreams.",
           "A city that floated in the clouds, visible only at dawn.",
           "A city that existed underwater and spoke in bubbles."
-        ]
+        ],
+        "answer": "A city that floated in the clouds, visible only at dawn."
       },
       {
         "question": "What lesson did Alex learn from the journey?",
@@ -37,7 +40,8 @@ const ExtractCatalogue = [
           "The importance of carrying a map at all times.",
           "That belief and perception shape reality.",
           "The need for better compasses."
-        ]
+        ],
+        "answer": "That belief and perception shape reality."
       },
       {
         "question": "What impact did Alex's book have?",
@@ -45,7 +49,8 @@ const ExtractCatalogue = [
           "It was largely ignored by the public.",
           "It inspired others to seek out the hidden wonders of the world.",
           "It became a bestseller but was criticized for its lack of scientific evidence."
-        ]
+        ],
+        "answer": "It inspired others to seek out the hidden wonders of the world."
       }
     ]
   },
@@ -68,7 +73,8 @@ const ExtractCatalogue = [
           "To repair the clock tower whenever it broke down.",
           "To maintain the flow of time and ensure history remained in balance.",
           "To teach the townsfolk about the history of their town."
-        ]
+        ],
+        "answer": "To maintain the flow of time and ensure history remained in balance."
       },
       {
         "question": "What did Lily learn from the Timekeeper?",
@@ -76,7 +82,8 @@ const ExtractCatalogue = [
           "How to read and write the ancient language of the town.",
           "The importance of being punctual to every event.",
           "The language of gears and how to navigate the river of time."
-        ]
+        ],
+        "answer": "The language of gears and how to navigate the river of time."
       },
       {
         "question": "Why was Lily haunted by a question, and what was it?",
@@ -84,7 +91,8 @@ const ExtractCatalogue = [
           "She wondered why the Timekeeper chose her as an apprentice.",
           "She wanted to know what moment she would visit if she had the chance.",
           "She questioned the existence of the clock tower."
-        ]
+        ],
+        "answer": "She wanted to know what moment she would visit if she had the chance."
       },
       {
         "question": "What did Lily do with the Timekeeper’s blessing?",
@@ -92,7 +100,8 @@ const ExtractCatalogue = [
           "She decided to leave the town in search of a new life.",
           "She prepared for a journey to revisit a moment from her childhood.",
           "She took over the duties of the Timekeeper permanently."
-        ]
+        ],
+        "answer": "She prepared for a journey to revisit a moment from her childhood."
       },
       {
         "question": "What was the outcome of Lily’s journey?",
@@ -100,7 +109,8 @@ const ExtractCatalogue = [
           "She altered the course of history unintentionally.",
           "She gained a new appreciation for the balance of time.",
           "She decided to dismantle the clock tower."
-        ]
+        ],
+        "answer": "She gained a new appreciation for the balance of time."
       }
     ]
   },
@@ -118,7 +128,8 @@ const ExtractCatalogue = [
                 "It was a home for retired sailors.",
                 "It guided ships to safety with its light.",
                 "It was a museum for maritime artifacts."
-              ]
+              ],
+              "answer": "It guided ships to safety with its light."
             },
             {
               "question": "What secret did Mr. Thomlinson share with Alex?",
@@ -126,7 +137,8 @@ const ExtractCatalogue = [
                 "The lighthouse was a hidden pirate treasure.",
                 "The lighthouse was a gateway to different times and places.",
                 "The lighthouse was built on a cursed land."
-              ]
+              ],
+              "answer": "The lighthouse was a gateway to different times and places."
             },
             {
               "question": "What did the ancient maps and glowing artifacts represent?",
@@ -134,7 +146,8 @@ const ExtractCatalogue = [
                 "Decorations to attract tourists.",
                 "Keys to unlocking gateways to different times and places.",
                 "Clues to a hidden treasure beneath the lighthouse."
-              ]
+              ],
+              "answer": "Keys to unlocking gateways to different times and places."
             },
             {
               "question": "Describe the first adventure that Mr. Thomlinson and Alex embarked on.",
@@ -142,7 +155,8 @@ const ExtractCatalogue = [
                 "They traveled to a distant land in search of treasure.",
                 "They went back in time to witness the construction of the lighthouse.",
                 "They found themselves on the deck of a ship, facing the unknown."
-              ]
+              ],
+              "answer": "They found themselves on the deck of a ship, facing the unknown."
             },
             {
               "question": "What realization did Alex have upon returning from the adventure?",
@@ -150,7 +164,8 @@ const ExtractCatalogue = [
                 "The lighthouse was just an old building.",
                 "The journey ahead was filled with possibilities and discoveries.",
                 "They preferred the safety of the town over adventures."
-              ]
+              ],
+              "answer": "The journey ahead was filled with possibilities and discoveries."
             }
           ]
         },
@@ -168,7 +183,8 @@ const ExtractCatalogue = [
                 "It was a scientific experiment in sound dynamics.",
                 "It was designed to be a monument to memory.",
                 "It was a private art installation not meant for the public."
-              ]
+              ],
+              "answer": "It was designed to be a monument to memory."
             },
             {
               "question": "What unique feature did the Echo Chamber possess?",
@@ -176,7 +192,8 @@ const ExtractCatalogue = [
                 "It could make people invisible.",
                 "It could replay the city's sounds as echoes.",
                 "It was built entirely from recycled materials."
-              ]
+              ],
+              "answer": "It could replay the city's sounds as echoes."
             },
             {
               "question": "What did Sam discover inside the Echo Chamber?",
@@ -184,7 +201,8 @@ const ExtractCatalogue = [
                 "A hidden treasure chest.",
                 "A collection of ancient artifacts.",
                 "An orchestra of sounds from the city's past."
-              ]
+              ],
+              "answer": "An orchestra of sounds from the city's past."
             },
             {
               "question": "How did the public respond to Sam's article about the Echo Chamber?",
@@ -192,7 +210,8 @@ const ExtractCatalogue = [
                 "They demanded the building be demolished.",
                 "It went viral, leading many to visit the Echo Chamber.",
                 "They criticized it as a work of fiction."
-              ]
+              ],
+              "answer": "It went viral, leading many to visit the Echo Chamber."
             },
             {
               "question": "What was the main theme of the Echo Chamber story?",
@@ -200,7 +219,8 @@ const ExtractCatalogue = [
                 "The importance of technological innovation.",
                 "The power of silence in a noisy world.",
                 "The significance of preserving history through sounds."
-              ]
+              ],
+              "answer": "The significance of preserving history through sounds."
             }
           ]
         },

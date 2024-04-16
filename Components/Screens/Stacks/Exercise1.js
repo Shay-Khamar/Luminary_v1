@@ -10,6 +10,7 @@ import * as Speech from 'expo-speech';
 import { useNavigation } from '@react-navigation/native';
 import CameraScreen from '../../Displays/CameraScreen';
 import { useRecording } from '../../misc/RecordingContext';
+import ComprehensionWindow from '../../Displays/ComprehensionWindow';
 
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -110,6 +111,7 @@ const Exercise1 = () => {
       ))}
     </ScrollView>
     </View>
+    <ComprehensionWindow item={item} />
     </View>
     <TouchableOpacity onPress={navResultScreen} style={styles.tester}><Ionicons name="checkmark-circle" size={50} color="black" /></TouchableOpacity>
     </View>
