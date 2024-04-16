@@ -5,6 +5,10 @@ import * as MediaLibrary from 'expo-media-library';
 import { ActivityIndicator, Portal, PaperProvider } from 'react-native-paper';
 import TestButton from '../Buttons/TestButtons';
 import ModalComponent from './ModalComponent';
+import { useRecording } from '../misc/RecordingContext';
+import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+
+
 
 import { uploadVideoAsync } from '../../firebaseConfig';
 
@@ -12,15 +16,46 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const CameraScreen = () => {
-  const [visible, setVisible] = useState(false);
+  //const [visible, setVisible] = useState(false);
   const [CameraPermission, setCameraPermission] = useState(null);
   const [MicrophonePermission, setMicrophonePermission] = useState(null);
   const [mediaPermission, setMediaPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.front);
-  const [isRecording, setIsRecording] = useState(false);
+  //const [isRecording, setIsRecording] = useState(false);
   const [videoUri, setVideoUri] = useState(null);
-  const cameraRef = useRef(null);
+  //const cameraRef = useRef(null);
   const [checked, setChecked] = useState(false);
+
+  const { setVisible, visible,  startRecording, stopRecording, cameraRef, isRecording , handleUploadPress, toggleCameraMinimized  } = useRecording();
+
+
+  const width = useSharedValue('100%');
+  const height = useSharedValue('100%');
+  const bottom = useSharedValue(0);
+  const left = useSharedValue(0);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      width: width.value,
+      height: height.value,
+      position: 'absolute',
+      bottom: bottom.value,
+      left: left.value,
+    };
+  });
+
+
+  const shrinkAndMoveToCorner = () => {
+    width.value = withSpring('15%');
+    height.value = withSpring('20%');
+    bottom.value = withSpring(20); // Adjust as needed
+    left.value = withSpring(20); // Adjust as needed
+    toggleCameraMinimized(true);
+  };
+
+
+  
+
 
   useEffect(() => {
     const requestPermissions = async () => {
@@ -49,56 +84,33 @@ const CameraScreen = () => {
     return <ActivityIndicator animating={true} color="#000" />;
   }
 
-  const handleUploadPress = async () => {
-    setVisible(false);
-    if (videoUri) {
-      try {
-        const uploadUrl = await uploadVideoAsync(videoUri);
-        console.log('Uploaded video URL:', uploadUrl);
-      } catch (error) {
-        console.error('Error uploading video:', error);
-      }
-    }
-  };
-
   const handleRecording = async () => {
     if (isRecording) {
       stopRecording();
     } else {
       startRecording();
+      shrinkAndMoveToCorner();
+
     }
   };
 
-  const startRecording = async () => {
-    if (cameraRef.current) {
-      setIsRecording(true);
-      const options = { quality: '720p' };
-      const recording = await cameraRef.current.recordAsync(options);
-      setIsRecording(false);
-      if (!recording.cancelled) {
-        setVideoUri(recording.uri);
-        showModal();
-        console.log(visible);
-      }
-    }
-  };
-
-  const stopRecording = async () => {
-    if (cameraRef.current) {
-      setIsRecording(false);
-      cameraRef.current.stopRecording();
-    }
-  };
-
-  const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
+
+
+ 
+
+
+
+  
+
+
 
   return (
     <PaperProvider>
-    <View style={styles.cameraContainer}>
+    <Animated.View style={[styles.cameraContainer, animatedStyle]}>
       <Camera style={styles.camera} type={type} ref={cameraRef}>
-        <View style={styles.buttonContainer}>
-          <TestButton color={isRecording ? 'blue' : 'red'} onPress={handleRecording} />
+        <View style={[styles.buttonContainer, { display: isRecording ? "none" : undefined }]}>
+          <TestButton color={isRecording ? 'blue' : 'red'} onPress={handleRecording}/>
         </View>
       </Camera>
           
@@ -113,7 +125,7 @@ const CameraScreen = () => {
              text="Would you like to upload this video?"
            />
            </Portal>
-    </View>
+    </Animated.View>
    </PaperProvider>
   );
 };
@@ -122,11 +134,11 @@ export default CameraScreen;
 
 const styles = StyleSheet.create({
   cameraContainer: {
-    overflow: 'hidden',
+    flex: 1,
+    borderRadius: 20,
   },
   camera: {
-    width: '100%',
-    height: '100%',
+    flex: 1,
     borderRadius: 20,
   },
   buttonContainer: {

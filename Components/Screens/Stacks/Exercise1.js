@@ -8,6 +8,8 @@ import {  Dialog, Portal, } from 'react-native-paper';
 import DialogBoxComponent from '../../Displays/DialogBoxComponent';
 import * as Speech from 'expo-speech';
 import { useNavigation } from '@react-navigation/native';
+import CameraScreen from '../../Displays/CameraScreen';
+import { useRecording } from '../../misc/RecordingContext';
 
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -24,6 +26,9 @@ const TextContent = {
 };
 
 const Exercise1 = () => {
+
+  const { cameraMinimized } = useRecording();
+
 
   const navigation = useNavigation();
 
@@ -55,10 +60,19 @@ const Exercise1 = () => {
     });
   };
 
+  const cameraScreenContainerStyle = {
+      position: 'absolute', // Position the camera screen absolutely
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: 10, // Ensure it's above other components
+      pointerEvents: cameraMinimized ? 'box-none' : 'auto', 
+  }
+
 
   return (
     <>
-
     <DialogBoxComponent visible={visible} onDismiss={hideDialog} Title={'Just Before Start'}>
       <TouchableOpacity onPress={readTextAloud}><FontAwesome name="volume-up" size={24} color="black" /></TouchableOpacity>
       <Text style={styles.DialogText}>
@@ -77,7 +91,6 @@ const Exercise1 = () => {
       <Text style={styles.subheading}>Gratitude:</Text>{TextContent.gratitude}
       </Text>
       </DialogBoxComponent>
-
 
     <FontProvider>
     <View style={styles.container}>
@@ -101,6 +114,11 @@ const Exercise1 = () => {
     <TouchableOpacity onPress={navResultScreen} style={styles.tester}><Ionicons name="checkmark-circle" size={50} color="black" /></TouchableOpacity>
     </View>
     </FontProvider>
+
+    <View style={cameraScreenContainerStyle}>
+    <CameraScreen />
+    </View>
+
     </>
   );
 };

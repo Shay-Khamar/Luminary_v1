@@ -6,6 +6,7 @@ import { NavigationContainer, getFocusedRouteNameFromRoute  } from '@react-navig
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { PaperProvider } from 'react-native-paper';
+import { RecordingProvider } from './Components/misc/RecordingContext';
 import * as ScreenOrientation from 'expo-screen-orientation'
 import { useFonts } from 'expo-font';
 
@@ -70,6 +71,12 @@ export default function App() {
   const [orienation, setOrientation] = useState(1);
   const [dimensions, setDimensions] = useState({ width: Dimensions.get('window').width, height: Dimensions.get('window').height });
 
+
+  useEffect(() => {
+    LockOrientation();
+  }, []);
+
+
   let [fontsLoaded] = useFonts({
     'CourierPrime': require('./assets/fonts/CourierPrime-Regular.ttf'),
     'Helvetica': require('./assets/fonts/Helvetica.ttf'),
@@ -78,19 +85,16 @@ export default function App() {
     'OpenSans': require('./assets/fonts/OpenSans-Regular.ttf'),
   });
 
-  
-
-
-
-  useEffect(() => {
-    LockOrientation();
-  }, []);
-
   const LockOrientation = async () => {
-    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
-    const o = await ScreenOrientation.getOrientationAsync();
-    setOrientation(o);
+    try {
+      await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+      const o = await ScreenOrientation.getOrientationAsync();
+      setOrientation(o);
+    } catch (error) {
+      console.error("Failed to lock orientation:", error);
+    }
   };
+  
 
   useEffect(() => {
     const update = () => {
@@ -107,12 +111,14 @@ export default function App() {
 
 
   return (
+    <RecordingProvider>
     <PaperProvider>
     <NavigationContainer>
      <StackNavigator />
       <StatusBar style="auto" />
     </NavigationContainer>
     </PaperProvider>
+    </RecordingProvider>
   );
 }
 AppRegistry.registerComponent('App', () => App);

@@ -15,7 +15,7 @@ const ModalComponent = ({ visible, hideModal, onUploadPress, isChecked, toggleCh
         <Text style={styles.modalText}>{text}</Text>
         <View style={styles.buttonRow}>
         <ThemedButton name="bruce" type="primary" s width={100} onPressOut={isChecked ? onUploadPress : undefined} backgroundColor={"#000"}  style={[styles.button,{ opacity: isChecked ? 1 : 0.5 }, ]} >Upload</ThemedButton>
-        <ThemedButton name="bruce" type="primary" style={styles.button} width={100} onPressOut={hideModal} backgroundColor={"#000"} >
+        <ThemedButton name="bruce" type="primary" style={styles.button} width={100} onPressOut={hideModal} backgroundColor={"#000"}>Cancel
         </ThemedButton>
         </View>
         <View style={styles.checkboxContainer}>

@@ -1,48 +1,211 @@
 const ExtractCatalogue = [
+
+  {
+    "id": "1",
+    "title": "The Map of Invisible Cities",
+    "content": "In a world where maps lead to known places, there existed one that charted the unknown—the Map of Invisible Cities. This map, drawn by the legendary cartographer Elias, was rumored to reveal the locations of cities that were invisible to the untrained eye, hidden in plain sight yet unreachable without true belief.\n\nAlex, a young explorer with an insatiable curiosity for the mysteries of the unknown, came into possession of this map after years of searching. It was in a quaint bookshop, hidden between the pages of an ancient atlas, that Alex discovered the map. With the Map of Invisible Cities in hand, Alex set out on a journey that would defy logic and understanding.\n\nThe first destination was a city that floated in the clouds, only visible at dawn when the light was just right. The next, a city that whispered its location to the wind, requiring one to listen closely to the breezes. With each city visited, Alex gathered knowledge and stories, meeting inhabitants who shared tales of their unique lives and cultures.\n\nHowever, the true discovery was not the cities themselves, but the realization that belief and perception shape reality. Alex learned that these cities had always existed alongside the known world but were revealed only to those who dared to look beyond what was considered possible.\n\nReturning home, Alex decided to write a book, detailing the journey and the lessons learned. The book, 'Journeys to the Invisible Cities,' became a beacon of inspiration for dreamers and explorers alike, challenging them to seek out the wonders hidden in plain view, waiting for those brave enough to believe in the impossible.",
+    "difficultyLevel": "Medium",
+    "category": "Adventure",
+    "comprehensionQuestions": [
+      {
+        "question": "What made the Map of Invisible Cities unique?",
+        "options": [
+          "It was the oldest map ever discovered.",
+          "It showed the locations of hidden, invisible cities.",
+          "It was made entirely of gold."
+        ]
+      },
+      {
+        "question": "How did Alex discover the Map of Invisible Cities?",
+        "options": [
+          "By decoding a secret message.",
+          "Hidden between the pages of an ancient atlas in a bookshop.",
+          "It was given as a gift from a mysterious stranger."
+        ]
+      },
+      {
+        "question": "What was one of the cities Alex visited?",
+        "options": [
+          "A city that could only be entered through dreams.",
+          "A city that floated in the clouds, visible only at dawn.",
+          "A city that existed underwater and spoke in bubbles."
+        ]
+      },
+      {
+        "question": "What lesson did Alex learn from the journey?",
+        "options": [
+          "The importance of carrying a map at all times.",
+          "That belief and perception shape reality.",
+          "The need for better compasses."
+        ]
+      },
+      {
+        "question": "What impact did Alex's book have?",
+        "options": [
+          "It was largely ignored by the public.",
+          "It inspired others to seek out the hidden wonders of the world.",
+          "It became a bestseller but was criticized for its lack of scientific evidence."
+        ]
+      }
+    ]
+  },
+
+
+
+
+
+
+  {
+    "id": "2",
+    "title": "The Timekeeper’s Apprentice",
+    "content": "In the cobblestone streets of an old town where time seemed to stand still, there was a clock tower that reached towards the sky, its hands moving in silent precision. The Timekeeper, a master of moments and guardian of seconds, lived in solitude, dedicating his life to maintaining the flow of time. One day, he decided it was time to pass on his knowledge. He took in an apprentice, a young girl named Lily, curious about the mysteries of time.\n\nLily was fascinated by the Timekeeper’s work. Under his guidance, she learned the language of gears and the dance of pendulums. She discovered that the clock tower was not merely a keeper of time, but a gateway to moments lost and found. The Timekeeper showed her how to navigate the river of time, to visit moments of joy and sorrow, and to understand that every second held a story waiting to be told.\n\nAs Lily’s skills grew, so did her understanding of the weight of their duty. She learned that to alter even a second could unravel the tapestry of history. Together, they worked in harmony, ensuring that the past, present, and future remained in balance.\n\nBut Lily was haunted by a question: what moment would she visit if she had the chance? The answer came to her in a dream—one fleeting moment from her childhood, a goodbye she never got to say. With the Timekeeper’s blessing, Lily prepared for her journey, understanding the risks but driven by the heart.\n\nHer journey was brief but profound. She returned with a new appreciation for the delicate balance of time and a deeper connection to the world around her. The Timekeeper, seeing the change in Lily, knew that his apprentice was ready to become the new guardian of moments. Together, they watched the horizon, where the future was an endless sea of possibilities.",
+    "difficultyLevel": "Medium",
+    "category": "Fantasy",
+    "comprehensionQuestions": [
+      {
+        "question": "What was the primary duty of the Timekeeper?",
+        "options": [
+          "To repair the clock tower whenever it broke down.",
+          "To maintain the flow of time and ensure history remained in balance.",
+          "To teach the townsfolk about the history of their town."
+        ]
+      },
+      {
+        "question": "What did Lily learn from the Timekeeper?",
+        "options": [
+          "How to read and write the ancient language of the town.",
+          "The importance of being punctual to every event.",
+          "The language of gears and how to navigate the river of time."
+        ]
+      },
+      {
+        "question": "Why was Lily haunted by a question, and what was it?",
+        "options": [
+          "She wondered why the Timekeeper chose her as an apprentice.",
+          "She wanted to know what moment she would visit if she had the chance.",
+          "She questioned the existence of the clock tower."
+        ]
+      },
+      {
+        "question": "What did Lily do with the Timekeeper’s blessing?",
+        "options": [
+          "She decided to leave the town in search of a new life.",
+          "She prepared for a journey to revisit a moment from her childhood.",
+          "She took over the duties of the Timekeeper permanently."
+        ]
+      },
+      {
+        "question": "What was the outcome of Lily’s journey?",
+        "options": [
+          "She altered the course of history unintentionally.",
+          "She gained a new appreciation for the balance of time.",
+          "She decided to dismantle the clock tower."
+        ]
+      }
+    ]
+  },
+
         {
-            id: "1",
-            title: "The Hidden Garden",
-            content: "Once upon a time, in a land filled with rolling hills and endless skies, there was a hidden garden. This garden was not just any ordinary patch of land; it was a magical place where the flowers whispered in the wind, and the trees danced to the melody of the earth. The entrance to this garden was guarded by a large, ancient oak tree, which only revealed the path to those it deemed worthy.\n\nA young girl named Elara found herself standing before the great oak on a breezy afternoon. She had heard stories of the hidden garden from her grandmother, who spoke of its beauty and magic with a twinkle in her eye. Filled with curiosity and determination, Elara asked the oak to grant her passage. To her amazement, the tree slowly bent its branches, revealing a narrow path that shimmered with a light all its own.\n\nAs Elara stepped into the garden, she was greeted by the sweet scent of lavender and the gentle hum of bees. The flowers seemed to lean towards her as if they were curious about the new visitor. She wandered deeper, marveling at the vibrant colors and the soft whispers of the plants. In the heart of the garden, there was a clear, sparkling pond. The water was so clear that Elara could see the pebbles at the bottom, each one glowing with a light of its own.\n\nSuddenly, a gentle voice called out to her. It was the spirit of the garden, a luminous figure that glowed with an ethereal light. The spirit welcomed Elara and thanked her for visiting. It explained that the garden was a sanctuary for all living things, a place of peace and harmony. Elara spent the whole day in the garden, listening to the stories of the spirit and learning about the magic that kept the garden alive.\n\nAs the sun began to set, painting the sky with hues of orange and pink, Elara knew it was time to leave. She thanked the spirit and the garden for welcoming her. The spirit smiled and promised that the garden would always be open for her, whenever she sought peace and beauty. With a heart full of joy and wonder, Elara made her way back through the path, which now seemed to glow even brighter than before. She knew she would return, but for now, she carried the magic of the garden within her, a treasure more precious than gold.",
-            difficultyLevel: "Easy",
-            category: "Fantasy",
-            comprehensionQuestions: {
-                comp1: "What was unique about the garden that Elara visited?",
-                comp2: "How did Elara gain entry into the hidden garden?",
-                comp3: "Describe the interaction between Elara and the flowers when she first entered the garden.",
-                comp4: "Who did Elara meet in the heart of the garden, and what did they discuss?",
-                comp5: "Why did Elara decide it was time to leave the garden, and what did she take away from her experience?"
-              }
+          "id": "3",
+          "title": "The Lighthouse Keeper's Secret",
+          "content": "In a quaint coastal town, where the sea meets the sky in a line of endless blue, stood an ancient lighthouse. It had guided countless ships to safety with its steadfast light. The lighthouse keeper, an old man named Mr. Thomlinson, was known to be both wise and mysterious, harboring a secret few could guess.\n\nOne stormy evening, a curious teenager named Alex sought shelter in the lighthouse. Alex had always been fascinated by the lighthouse and its keeper, dreaming of adventures beyond the horizon. Mr. Thomlinson, seeing the spark of curiosity in Alex's eyes, decided it was time to share his secret. He led Alex to a hidden room where the walls were lined with ancient maps and strange, glowing artifacts.\n\nMr. Thomlinson revealed that the lighthouse was more than a beacon for ships; it was a gateway to different times and places. The artifacts were keys to unlocking these gateways. Bewildered but excited, Alex listened as Mr. Thomlinson spoke of his travels to distant lands and times, where he had gathered wisdom and treasures. He offered Alex a small, intricately carved compass, explaining that it was now their turn to embark on a journey.\n\nAs the storm raged outside, Mr. Thomlinson and Alex planned their first adventure. The compass began to glow, and the room around them shifted. They found themselves on the deck of a ship, facing the unknown. With the lighthouse’s light fading into the distance, they knew that the journey ahead was filled with possibilities and that the lighthouse would always guide them home.\n\nUpon their return, the sun was rising, casting a golden glow over the sea. Alex realized that the adventure had only just begun. With the compass in hand and a heart full of dreams, the journey ahead seemed limitless. The lighthouse wasn’t just a beacon; it was a promise of discovery and understanding, a guide through the storms of life.",
+          "difficultyLevel": "Medium",
+          "category": "Adventure",
+          "comprehensionQuestions": [
+            {
+              "question": "What role did the lighthouse serve in the coastal town?",
+              "options": [
+                "It was a home for retired sailors.",
+                "It guided ships to safety with its light.",
+                "It was a museum for maritime artifacts."
+              ]
+            },
+            {
+              "question": "What secret did Mr. Thomlinson share with Alex?",
+              "options": [
+                "The lighthouse was a hidden pirate treasure.",
+                "The lighthouse was a gateway to different times and places.",
+                "The lighthouse was built on a cursed land."
+              ]
+            },
+            {
+              "question": "What did the ancient maps and glowing artifacts represent?",
+              "options": [
+                "Decorations to attract tourists.",
+                "Keys to unlocking gateways to different times and places.",
+                "Clues to a hidden treasure beneath the lighthouse."
+              ]
+            },
+            {
+              "question": "Describe the first adventure that Mr. Thomlinson and Alex embarked on.",
+              "options": [
+                "They traveled to a distant land in search of treasure.",
+                "They went back in time to witness the construction of the lighthouse.",
+                "They found themselves on the deck of a ship, facing the unknown."
+              ]
+            },
+            {
+              "question": "What realization did Alex have upon returning from the adventure?",
+              "options": [
+                "The lighthouse was just an old building.",
+                "The journey ahead was filled with possibilities and discoveries.",
+                "They preferred the safety of the town over adventures."
+              ]
+            }
+          ]
         },
 
         {
-            id: "2",
-            title: "The Clockmaker's Secret",
-            content: "In the bustling town of Pendleton, where the streets were lined with cobblestone and the air buzzed with the chatter of its inhabitants, there lived an ingenious clockmaker named Mr. Horace. His shop, a quaint little building nestled between the town's bakery and the old library, was filled to the brim with clocks of all shapes and sizes. The ticking, tocking, and chiming of the clocks created a symphony that enchanted anyone who passed by.\n\nMr. Horace was known far and wide not only for his unparalleled skill in crafting the most precise and beautiful clocks but also for a secret that many believed was the true source of his talent. It was said that within his workshop, hidden behind a moveable panel, lay a mysterious clock unlike any other. This clock, crafted from a unique blend of metals, had the power to manipulate time itself.\n\nOne chilly autumn evening, a curious young boy named Theo decided to uncover the truth behind Mr. Horace's secret. With a heart full of courage and a mind buzzing with curiosity, Theo visited the clockmaker's shop. Mr. Horace, with a twinkle in his eye, welcomed Theo and, to the boy's surprise, revealed the hidden panel and the magnificent clock it concealed.\n\nThe clock was indeed extraordinary, with intricate designs and symbols etched into its surface, and its hands moved in a pattern that seemed to defy the natural order. Mr. Horace explained that the clock did not control time as the rumors suggested but instead offered a reflection on its importance. It reminded those who understood its true purpose to cherish every moment, for time was the most precious commodity of all.\n\nTheo, mesmerized by the clock and moved by Mr. Horace's words, spent hours in the shop, learning about the art of clockmaking and the value of time. As the night grew deeper, he realized that the real magic was not in the manipulation of time, but in the moments shared and the lessons learned.\n\nWhen it was time to leave, Theo thanked Mr. Horace for the invaluable lesson. The clockmaker smiled, knowing that Theo had discovered something far more significant than the secret of the clock. With a newfound appreciation for the moments that make up our lives, Theo stepped out into the night, the echoes of the clocks' symphony accompanying him, a reminder to cherish every tick and tock of life's journey.",
-            difficultyLevel: "Medium",
-            category: "Fantasy",
-            comprehensionQuestions: {
-              comp1: "Who was Mr. Horace and what was he known for in the town of Pendleton?",
-              comp2: "What was the rumored secret behind Mr. Horace's talent in clockmaking?",
-              comp3: "Describe the first impression Theo had upon seeing the mysterious clock.",
-              comp4: "What did Mr. Horace reveal about the true nature and purpose of the mysterious clock?",
-              comp5: "How did Theo's understanding of time change after his visit to the clockmaker's shop?"
+          "id": "4",
+          "title": "The Architect of Echoes",
+          "content": "In the heart of a bustling city, among the cacophony of daily life, stood a peculiar building known only as the Echo Chamber. Its architect, a reclusive genius named Dr. Melody, had designed it with a labyrinth of walls and corridors that could capture and replay the sounds of the city in a symphony of echoes. It was said that those who entered could hear the whispers of the past and the hopes of the future.\n\nOne evening, a determined journalist named Sam decided to uncover the mysteries of the Echo Chamber. Sam had always been intrigued by stories of time capsules and hidden messages, and the Echo Chamber seemed to be a treasure trove of such tales. With Dr. Melody's reluctant permission, Sam entered the building, notepad in hand, ready to document the unheard stories of the city.\n\nInside, Sam was greeted by an orchestra of sounds: children's laughter from years gone by, the distant toll of a long-demolished clock tower, and whispers of lovers long separated. Each step through the corridors brought new discoveries, as the walls replayed the life of the city in a way no one had ever heard. In the center of the Echo Chamber, Sam found a room where the echoes converged, creating a harmonious blend of the city's heartbeat.\n\nDr. Melody explained that the Echo Chamber was not just an architectural marvel; it was a monument to memory, designed to remind everyone of the stories that shape us. Moved by the experience, Sam wrote an article that captured the essence of the Echo Chamber, emphasizing its role in preserving the intangible heritage of the city.\n\nAs the article went viral, people from all walks of life began to visit the Echo Chamber, each seeking to connect with the echoes of their past. The Echo Chamber had become a place of reflection and understanding, a reminder that in the hustle and bustle of life, every sound has a story, and every echo is a piece of history.",
+          "difficultyLevel": "Medium",
+          "category": "Mystery",
+          "comprehensionQuestions": [
+            {
+              "question": "What was the purpose of the Echo Chamber according to Dr. Melody?",
+              "options": [
+                "It was a scientific experiment in sound dynamics.",
+                "It was designed to be a monument to memory.",
+                "It was a private art installation not meant for the public."
+              ]
+            },
+            {
+              "question": "What unique feature did the Echo Chamber possess?",
+              "options": [
+                "It could make people invisible.",
+                "It could replay the city's sounds as echoes.",
+                "It was built entirely from recycled materials."
+              ]
+            },
+            {
+              "question": "What did Sam discover inside the Echo Chamber?",
+              "options": [
+                "A hidden treasure chest.",
+                "A collection of ancient artifacts.",
+                "An orchestra of sounds from the city's past."
+              ]
+            },
+            {
+              "question": "How did the public respond to Sam's article about the Echo Chamber?",
+              "options": [
+                "They demanded the building be demolished.",
+                "It went viral, leading many to visit the Echo Chamber.",
+                "They criticized it as a work of fiction."
+              ]
+            },
+            {
+              "question": "What was the main theme of the Echo Chamber story?",
+              "options": [
+                "The importance of technological innovation.",
+                "The power of silence in a noisy world.",
+                "The significance of preserving history through sounds."
+              ]
             }
+          ]
         },
 
-        {
-            id: "3",
-            title: "The Lighthouse Keeper’s Secret",
-            content: "Far off on a rugged coastline, where the waves clashed against the cliffs with a force that shook the very earth, stood a towering lighthouse. Its light, a beacon of hope, pierced through the thickest fogs and darkest nights, guiding sailors safely to shore. The keeper of this lighthouse, an old man named Finn, was as much a part of the landscape as the cliffs themselves. With a weathered face and eyes that mirrored the vast ocean, Finn carried the aura of mystery and wisdom.\n\nFinn’s lighthouse was not only a beacon for ships but also a haven for the lost and weary. It was rumored among the townsfolk that Finn possessed a secret key that unlocked a hidden room within the lighthouse. This room, shrouded in mystery, was said to hold the power to illuminate not just the physical path for the sailors, but also the path to one's true destiny.\n\nOn a night when the stars were hidden by a veil of clouds, a young traveler named Ada found herself at the foot of the lighthouse. Driven by tales of Finn’s wisdom and the legendary hidden room, Ada sought guidance for her life’s direction. Finn welcomed her with a gentle nod, as if he had been expecting her all along.\n\nAs the night unfolded, Finn shared stories of the sea, the stars, and the many souls he had guided. With each tale, Ada felt a growing sense of clarity and purpose. Finally, Finn revealed the secret of the lighthouse. He handed Ada an ancient, ornate key and led her to a door she hadn't noticed before.\n\nThe room beyond was filled with maps of the stars and the sea, instruments of navigation old and new, and a multitude of books and scrolls. The true secret, Finn explained, was the knowledge and wisdom collected from generations of keepers before him. This room was a testament to the understanding that guidance comes not from mystical powers, but from learning and experience.\n\nAda spent the rest of the night exploring the treasures of the room, each piece a story, each story a lesson. As dawn broke, she realized that her path was not something to be found but to be forged through the insights and understandings gained from others and from her own experiences.\n\nGrateful for the wisdom shared, Ada left the lighthouse at sunrise, not with all the answers, but with a newfound direction and the understanding that the journey itself is where life’s true meaning lies.",
-            difficultyLevel: "Medium",
-            category: "Adventure",
-            comprehensionQuestions: {
-              comp1: "What significant role did Finn's lighthouse play for the sailors and the lost?",
-              comp2: "What was the rumored secret within the lighthouse that intrigued Ada?",
-              comp3: "Describe the moment when Finn shared the true nature of the hidden room with Ada.",
-              comp4: "What did Ada discover inside the hidden room of the lighthouse?",
-              comp5: "How did Ada’s perspective on finding her life’s path change after her visit to the lighthouse?"
-            }
-        },
+        
 ]
 
 export default ExtractCatalogue

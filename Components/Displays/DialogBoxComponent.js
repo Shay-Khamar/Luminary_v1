@@ -21,8 +21,8 @@ const DialogBoxComponent = ({ visible, onDismiss, children, Title }) => {
 
 const styles = StyleSheet.create({
   DialogBox: {
-    width: '40%', // Adjusted for mobile screen
-    maxHeight: '80%', // Adjusted to manage dialog size
+    width: '40%', 
+    maxHeight: '80%', 
   },
   Title: {
     fontSize: 20, // Adjust as needed
