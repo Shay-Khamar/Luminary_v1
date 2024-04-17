@@ -36,6 +36,16 @@ const Exercise1 = () => {
   const {time, setTime, setIsActive} = useTimer();
   const [counter, setCounter] = useState(0);
 
+  const route = useRoute();
+  const item = route.params?.Extract;
+
+
+  const paragraphs = item?.content.split('\n\n');
+
+  const wordCount = item?.content.split(' ').length;
+
+  const totalQuestions = item?.comprehensionQuestions.length;
+
   const resetTimer = () => {
     setIsActive(false);
     setTime(0);
@@ -53,12 +63,9 @@ const Exercise1 = () => {
     
   }
 
-  const route = useRoute();
-  const item = route.params?.Extract;
-  // Split the content by newline characters to separate paragraphs
-  const paragraphs = item?.content.split('\n\n');
-
-  const wordCount = item?.content.split(' ').length;
+  const onCorrectAnswer = () => {
+    setCounter(prevCounter => prevCounter + 1);
+  };
   
 
  
@@ -68,12 +75,16 @@ const Exercise1 = () => {
 
   useEffect(() => {
     //Gonna need an if statement to check the state of the visivibility of the camera Screen, probably don't want it showing until after the calibration 
-    showDialog();
+    showDialog()
   }, []);
 
   useEffect(() => {
-    console.log( item.comprehensionQuestions.length);
-  }, []);
+    //Gonna need an if statement to check the state of the visivibility of the camera Screen, probably don't want it showing until after the calibration 
+    console.log('Counter: ', counter);
+  }, [counter]);
+
+
+  
 
   const results = () => {
     finalTime = time
@@ -85,9 +96,21 @@ const Exercise1 = () => {
 
   }
 
-  timeInMintues = time / 60;//This is the calcuations I am going to use to calculate the words per minute.
 
-  wordsPerMinute = wordCount / timeInMintues;//Really simple just need to get it on the results screen
+  /*
+  // In case the app tries to take over the world destory it with this statment.
+  if (item.option == item.answer) {
+    setCounter(counter + 1);
+    console.log("Correct answer");
+  } else {
+    console.log("Incorrect answer");
+  }
+  */
+
+
+
+
+  //Really simple just need to get it on the results screen
   /** - This should be simple I just need to write an if else condition
    * - That checks the users answer against the correct answer
    * - First I need to grab the amount of questions
@@ -169,7 +192,7 @@ const Exercise1 = () => {
     </View>
     )}
     {!showContent && (
-    <ComprehensionWindow item={item} />
+    <ComprehensionWindow item={item} onCorrectAnswer={onCorrectAnswer} />
     )}
     <View style={{flex: 1}}></View>
     {showContent && (

@@ -4,12 +4,18 @@ import { FontProvider } from '../misc/FontContext';
 import CustomText from '../misc/CustomText';
 import OptionsButton from '../Buttons/OptionsButton';
 
-const ComprehensionWindow = ({ item }) => {
+const ComprehensionWindow = ({ item, onCorrectAnswer }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const currentQuestion = item.comprehensionQuestions[currentQuestionIndex];
 
   const handleOptionPress = (option) => {
-    console.log(option);
+    //console.log(option);
     // Move to the next question
+    if(option === currentQuestion.answer){
+      onCorrectAnswer();
+    }
+
+
     if (currentQuestionIndex < item.comprehensionQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
@@ -22,7 +28,7 @@ const ComprehensionWindow = ({ item }) => {
     return null; // or some placeholder indicating there are no questions
   }
 
-  const currentQuestion = item.comprehensionQuestions[currentQuestionIndex];
+ 
 
   return (
     <FontProvider>
