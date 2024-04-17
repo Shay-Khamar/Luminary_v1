@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { PaperProvider } from 'react-native-paper';
 import { RecordingProvider } from './Components/misc/RecordingContext';
+import { TimerProvider } from './Components/misc/TimerContext';
 import * as ScreenOrientation from 'expo-screen-orientation'
 import { useFonts } from 'expo-font';
 
@@ -111,6 +112,7 @@ export default function App() {
 
 
   return (
+    <TimerProvider>
     <RecordingProvider>
     <PaperProvider>
     <NavigationContainer>
@@ -119,6 +121,7 @@ export default function App() {
     </NavigationContainer>
     </PaperProvider>
     </RecordingProvider>
+    </TimerProvider>
   );
 }
 AppRegistry.registerComponent('App', () => App);

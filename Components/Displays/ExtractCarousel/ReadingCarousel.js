@@ -7,11 +7,11 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const ReadingCarousel = () => {
-  const navigation = useNavigation(); // Use the hook to get the navigation object
+  const navigation = useNavigation(); 
   const isCarousel = React.useRef(null);
 
   const renderItem = ({item, index}) => (
-    <ReadingCarouselItem item={item} index={index} navigation={navigation} /> // Pass navigation as a prop
+    <ReadingCarouselItem item={item} index={index} navigation={navigation} /> // Passing navigation as a prop worked
   );
 
   return (

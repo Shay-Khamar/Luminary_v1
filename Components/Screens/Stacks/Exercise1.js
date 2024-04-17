@@ -50,6 +50,9 @@ const Exercise1 = () => {
   // Split the content by newline characters to separate paragraphs
   const paragraphs = item?.content.split('\n\n');
 
+  const wordCount = item?.content.split(' ').length;
+  
+
  
 
   const showDialog = () => setVisible(true);
@@ -59,6 +62,33 @@ const Exercise1 = () => {
     //Gonna need an if statement to check the state of the visivibility of the camera Screen, probably don't want it showing until after the calibration 
     showDialog();
   }, []);
+
+  useEffect(() => {
+    //Gonna need an if statement to check the state of the visivibility of the camera Screen, probably don't want it showing until after the calibration 
+    console.log(wordCount)
+  }, []);
+
+  timeInMintues = time_seconds / 60;//This is the calcuations I am going to use to calculate the words per minute.
+
+  wordsPerMinute = wordCount / timeInMintues;//Really simple just need to get it on the results screen
+  /** - This should be simple I just need to write an if else condition
+   * - That checks the users answer against the correct answer
+   * - First I need to grab the amount of questions
+   * - Then I need to grab the correct answer
+   * - Then I need to grab the users answer
+   * - Use a UseState to keep track of the score
+   * - If the users answer is correct increment the score
+   * - If the users answer is incorrect do nothing but move on to the next question.
+   * - Once the questions are done navigate to the results screen
+   * - Pass the score and the words per minute to the results screen
+   * - Display the score and the words per minute on the results screen
+   * - I think I need to create flexible context which allows me to pass results from one screen to the results screen.
+   * - Based of what task is being done.
+   * - Insted of making a context for each task I can make a context that is flexible enough to handle any task.
+   * - I can pass the task name and the results to the context and then pull the results from the context on the results screen.
+   * - This way I only need to create One results screen.
+   */
+
 
   const readTextAloud = () => {
     const allText = Object.values(TextContent).join(" ");
