@@ -8,7 +8,7 @@ export const useFont = () => useContext(FontContext);
 
 // Provider component
 export const FontProvider = ({ children }) => {
-  const [fontFamily, setFontFamily] = useState('DefaultFont');
+  const [fontFamily, setFontFamily] = useState('sans-serif');
 
   return (
     <FontContext.Provider value={{ fontFamily, setFontFamily }}>

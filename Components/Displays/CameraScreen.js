@@ -6,11 +6,13 @@ import { ActivityIndicator, Portal, PaperProvider } from 'react-native-paper';
 import TestButton from '../Buttons/TestButtons';
 import ModalComponent from './ModalComponent';
 import { useRecording } from '../misc/RecordingContext';
-import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withSpring, runOnJS } from 'react-native-reanimated';
+import { useTimer } from '../misc/TimerContext';
 
 
 
 import { uploadVideoAsync } from '../../firebaseConfig';
+import { set } from 'firebase/database';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -25,6 +27,7 @@ const CameraScreen = () => {
   const [videoUri, setVideoUri] = useState(null);
   //const cameraRef = useRef(null);
   const [checked, setChecked] = useState(false);
+  const { time, setTime,  setIsActive } = useTimer();
 
   const { setVisible, visible,  startRecording, stopRecording, cameraRef, isRecording , handleUploadPress, toggleCameraMinimized  } = useRecording();
 
@@ -45,12 +48,16 @@ const CameraScreen = () => {
   });
 
 
-  const shrinkAndMoveToCorner = () => {
+  const shrinkAndMoveToCorner = (onComplete) => {
     width.value = withSpring('15%');
     height.value = withSpring('20%');
     bottom.value = withSpring(20); // Adjust as needed
     left.value = withSpring(20); // Adjust as needed
     toggleCameraMinimized(true);
+
+    const animationCallback = {
+      onFinish: () => runOnJS(onComplete)(),
+    }
   };
 
 
@@ -89,7 +96,9 @@ const CameraScreen = () => {
       stopRecording();
     } else {
       startRecording();
+      //shrinkAndMoveToCorner();
       shrinkAndMoveToCorner();
+      setIsActive(true);
 
     }
   };

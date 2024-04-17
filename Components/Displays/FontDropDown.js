@@ -8,7 +8,7 @@ import { SelectList } from 'react-native-dropdown-select-list'
 const FontDropDown = () => {
     const { fontFamily, setFontFamily } = useFont();
     const fontData = [
-      { key: 'default', value: 'System Default' },
+      { key: 'sans-serif', value: 'sans-serif' },
       { key: 'OpenSans', value: 'OpenSans' },
       { key: 'Lexend', value: 'Lexend' },
       { key: 'Helvetica', value: 'Helvetica' },
@@ -18,13 +18,13 @@ const FontDropDown = () => {
     ];
   
     // Find the key of the currently selected font to match SelectList's expectations
-    const selectedKey = fontData.find(font => font.value === fontFamily)?.key || 'default';
+    const selectedKey = fontData.find(font => font.value === fontFamily)?.key || 'sans-serif';
   
     return (
       <SelectList 
         setSelected={(key) => {
           // Use the key to find the corresponding font value and update the context
-          const selectedFont = fontData.find(font => font.key === key)?.value || 'System Default';
+          const selectedFont = fontData.find(font => font.key === key)?.value || 'sans-serif';
           setFontFamily(selectedFont);
         }} 
         data={fontData} 

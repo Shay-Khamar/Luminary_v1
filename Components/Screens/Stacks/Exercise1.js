@@ -12,6 +12,7 @@ import CameraScreen from '../../Displays/CameraScreen';
 import { useRecording } from '../../misc/RecordingContext';
 import ComprehensionWindow from '../../Displays/ComprehensionWindow';
 import  AwesomeButton  from 'react-native-really-awesome-button';
+import { useTimer } from '../../misc/TimerContext';
 
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -28,14 +29,18 @@ const TextContent = {
 };
 
 const Exercise1 = () => {
-
-  const { cameraMinimized } = useRecording();
-
+  const { cameraMinimized, stopRecording  } = useRecording();
   const [showContent, setShowContent] = useState(true);
   const [visible, setVisible] = useState(false);
-
-
   const navigation = useNavigation();
+  const {time, setTime, setIsActive} = useTimer();
+  const [counter, setCounter] = useState(0);
+
+  const resetTimer = () => {
+    setIsActive(false);
+    setTime(0);
+
+  }
 
   navResultScreen = () => {
     navigation.navigate('ResultScreen');
@@ -43,6 +48,9 @@ const Exercise1 = () => {
 
   finishFunction = () => {
     setShowContent(false);
+    results();
+    resetTimer();
+    
   }
 
   const route = useRoute();
@@ -64,11 +72,20 @@ const Exercise1 = () => {
   }, []);
 
   useEffect(() => {
-    //Gonna need an if statement to check the state of the visivibility of the camera Screen, probably don't want it showing until after the calibration 
-    console.log(wordCount)
+    console.log( item.comprehensionQuestions.length);
   }, []);
 
-  timeInMintues = time_seconds / 60;//This is the calcuations I am going to use to calculate the words per minute.
+  const results = () => {
+    finalTime = time
+    timeInMintues = finalTime / 60;
+    wordsPerMinute = wordCount / timeInMintues;
+    console.log(time)
+    console.log(timeInMintues)
+    console.log(wordsPerMinute);
+
+  }
+
+  timeInMintues = time / 60;//This is the calcuations I am going to use to calculate the words per minute.
 
   wordsPerMinute = wordCount / timeInMintues;//Really simple just need to get it on the results screen
   /** - This should be simple I just need to write an if else condition
@@ -135,7 +152,7 @@ const Exercise1 = () => {
     <View style={styles.container}>
       <View style={styles.header}>
       <Text style={styles.title}>Exercise 1 Screen</Text>
-      <Text>0:00</Text>
+      <Text>Timer: {time}</Text>
       <FontDropDown />
       </View>
       <View style={styles.centeredBoxContainer}>
