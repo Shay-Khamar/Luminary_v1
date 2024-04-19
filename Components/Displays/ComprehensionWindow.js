@@ -4,7 +4,7 @@ import { FontProvider } from '../misc/FontContext';
 import CustomText from '../misc/CustomText';
 import OptionsButton from '../Buttons/OptionsButton';
 
-const ComprehensionWindow = ({ item, onCorrectAnswer }) => {
+const ComprehensionWindow = ({ item, onCorrectAnswer, onHandleGuess }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const currentQuestion = item.comprehensionQuestions[currentQuestionIndex];
 
@@ -13,6 +13,9 @@ const ComprehensionWindow = ({ item, onCorrectAnswer }) => {
     // Move to the next question
     if(option === currentQuestion.answer){
       onCorrectAnswer();
+    } else{
+      onHandleGuess();
+
     }
 
 

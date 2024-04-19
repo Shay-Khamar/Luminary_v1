@@ -9,6 +9,7 @@ import { PaperProvider } from 'react-native-paper';
 import { RecordingProvider } from './Components/misc/RecordingContext';
 import { TimerProvider } from './Components/misc/TimerContext';
 import * as ScreenOrientation from 'expo-screen-orientation'
+import {ResultProvider} from './Components/misc/ResultContext';
 import { useFonts } from 'expo-font';
 
 
@@ -112,6 +113,7 @@ export default function App() {
 
 
   return (
+    <ResultProvider>
     <TimerProvider>
     <RecordingProvider>
     <PaperProvider>
@@ -122,6 +124,7 @@ export default function App() {
     </PaperProvider>
     </RecordingProvider>
     </TimerProvider>
+    </ResultProvider>
   );
 }
 AppRegistry.registerComponent('App', () => App);

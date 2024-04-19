@@ -225,6 +225,153 @@ const ExtractCatalogue = [
           ]
         },
 
+        {
+          "id": "5",
+          "title": "The History of Chocolate",
+          "content": "Chocolate is now enjoyed all over the world but until the late sixteenth century it was only found in Central and South America. For years the indigenous people of Central and South America, the Aztecs and the Mayans, had been making chocolate from cacao beans and consuming it as a drink. Cacao beans carried great importance for both cultures: the Mayans considered them to be a gift from the gods and the Aztecs associated them with fertility. Both societies even used them as currency. Cacao beans were made into a chocolate drink by roasting them and adding water and chilli spice. The mixture also had medicinal purposes and was an important part of many traditional ceremonies. \n\nChristopher Columbus was introduced to cacao and chocolate on his last journey to the Americas in 1502. He took some beans back to Spain to show the king and queen, however, they were viewed with apathy. Chocolate didn’t truly arrive in Europe until 1585, when a shipment of beans came from Mexico to Spain. At this stage chocolate was still served as a drink but the Spaniards replaced the chilli with milk and sugar to sweeten the bitter taste. Cacao beans were in short supply and Spain guarded the secret of chocolate jealously. However, the luxury began to spread across the rest of Europe during the 17th century. Italy was next to appreciate chocolate and it finally arrived in England in 1650. Chocolate was only available to the wealthiest, who consumed it in fashionable ‘chocolate houses’, much like today’s coffee shops. The first chocolate house opened in London in 1657. \n\nChocolate remained a beverage for almost two hundred more years. It wasn’t until 1847 that Joseph Fry created the first solid chocolate bar for eating. Others followed soon after, with John Cadbury adding a chocolate bar to his range. The solid chocolate bar was based on cocoa butter, extracted from cacao beans in a method developed by the Dutch chocolate maker, Casparus van Houten in 1828. Chocolate was still dark at this point and there was not quite the selection that we have today. In 1875 Daniel Peter produced the first milk chocolate bar using powdered milk; he was assisted in his work by Henri Nestle, a name still affiliated with chocolate today. \n\nThe world continues to be obsessed with chocolate. We still love to eat chocolate, and Switzerland currently consumes the most at 10kg per person each year. Contemporary chefs not only produce chocolate based deserts and puddings but also combine sweet and savoury by adding chocolate to main course dishes, to stews, meat pies and even brussel sprouts. Modern society has also found other uses for chocolate. Chocolate face masks and chocolate massages are just some of the inventive ways in which chocolate has been used in health spas and beauty salons! It seems that chocolate, though now far removed from that known to the Aztecs, is as relished now as it was then.",
+          "difficultyLevel": "Medium",
+          "category": "History",
+          "comprehensionQuestions": [
+            {
+              "question": "Prior to the 16th Century, where was chocolate found?",
+              "options": [
+                "Europe",
+                "Central and South America",
+                "Asia"
+              ],
+              "answer": "Central and South America"
+            },
+            {
+              "question": "The Mayans and the Aztecs enjoyed chocolate as a drink. Name three other purposes that it had for these people.",
+              "options": [
+                "Used as currency, medicinal purposes, part of ceremonies",
+                "Decoration, clothing, currency",
+                "Medicine, building material, weapon"
+              ],
+              "answer": "Used as currency, medicinal purposes, part of ceremonies"
+            },
+            {
+              "question": "What does indigenous mean (see paragraph 1)?",
+              "options": [
+                "Foreign",
+                "Native",
+                "Uncommon"
+              ],
+              "answer": "Native"
+            },
+            {
+              "question": "In the context of paragraph 2, what does apathy mean?",
+              "options": [
+                "Curiosity",
+                "Enthusiasm",
+                "Lack of interest"
+              ],
+              "answer": "Lack of interest"
+            },
+            {
+              "question": "How do you think Columbus felt about the King and Queen’s reaction?",
+              "options": [
+                "Pleased",
+                "Indifferent",
+                "Disappointed"
+              ],
+              "answer": "Disappointed"
+            },
+            {
+              "question": "Why did the Spaniards replace the chilli with milk and sugar?",
+              "options": [
+                "To make it spicy",
+                "To sweeten the bitter taste",
+                "To preserve it longer"
+              ],
+              "answer": "To sweeten the bitter taste"
+            },
+            {
+              "question": "Give two reasons why it took a long time for other countries to be able to make chocolate drinks.",
+              "options": [
+                "Lack of knowledge, high cost",
+                "Cacao beans in short supply, Spain guarded the secret jealously",
+                "Poor quality beans, lack of interest"
+              ],
+              "answer": "Cacao beans in short supply, Spain guarded the secret jealously"
+            },
+            {
+              "question": "Why did the Spaniards guard the secret of chocolate with jealousy?",
+              "options": [
+                "To maintain exclusivity and control",
+                "Because of a curse",
+                "They forgot the recipe"
+              ],
+              "answer": "To maintain exclusivity and control"
+            },
+            {
+              "question": "What formed the foundation of the first solid chocolate bar?",
+              "options": [
+                "Sugar and milk",
+                "Cocoa butter extracted from cacao beans",
+                "Flour and water"
+              ],
+              "answer": "Cocoa butter extracted from cacao beans"
+            },
+            {
+              "question": "Who made it possible for chocolate to evolve from a beverage to a solid bar?",
+              "options": [
+                "Daniel Peter",
+                "Joseph Fry",
+                "Casparus van Houten"
+              ],
+              "answer": "Casparus van Houten"
+            },
+            {
+              "question": "What was the difference between chocolate made prior to 1875 and chocolate made after 1875?",
+              "options": [
+                "Dark vs. white chocolate",
+                "Bitter vs. sweet chocolate",
+                "Dark vs. milk chocolate"
+              ],
+              "answer": "Dark vs. milk chocolate"
+            },
+            {
+              "question": "In the context of paragraph 3, what does affiliated mean?",
+              "options": [
+                "Opposed",
+                "Connected or associated",
+                "Uninterested"
+              ],
+              "answer": "Connected or associated"
+            },
+            {
+              "question": "In what ways are the modern uses of chocolate similar to that of the Aztecs and Mayans?",
+              "options": [
+                "Used in ceremonies and as currency",
+                "Used in cooking and as medicine",
+                "Used as decoration and building material"
+              ],
+              "answer": "Used in cooking and as medicine"
+            },
+            {
+              "question": "Today we eat and drink chocolate, what other modern uses for chocolate are given in this passage?",
+              "options": [
+                "As paint and fuel",
+                "In health spas and beauty treatments",
+                "As a form of currency"
+              ],
+              "answer": "In health spas and beauty treatments"
+            },
+            {
+              "question": "In the context of paragraph 4, what does relished mean?",
+              "options": [
+                "Disliked",
+                "Enjoyed",
+                "Feared"
+              ],
+              "answer": "Enjoyed"
+            }
+          ]
+        }
+
+        
+
         
 ]
 

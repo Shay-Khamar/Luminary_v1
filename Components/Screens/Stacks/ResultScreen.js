@@ -1,11 +1,28 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { useResults } from '../../misc/ResultContext'
 
 
 const ResultScreen = () => {
+
+  const {exerciseData} = useResults();
+
+  const renderRusults = () => {
+    switch(exerciseData.exerciseType){
+      case  'Exercise1':
+        return (
+          <View>
+            <Text>WPM: {exerciseData.results.wpm}</Text>
+            <Text>Score:{exerciseData.results.score} / {exerciseData.results.tq}</Text>
+          </View>
+        )
+  }
+  }
+
+
   return (
     <View style={styles.container}>
-      <Text style={styles.placeholder}>TASK COMPLETETED !</Text>
+      {renderRusults()}
     </View>
   )
 }

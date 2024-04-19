@@ -13,6 +13,7 @@ import { useRecording } from '../../misc/RecordingContext';
 import ComprehensionWindow from '../../Displays/ComprehensionWindow';
 import  AwesomeButton  from 'react-native-really-awesome-button';
 import { useTimer } from '../../misc/TimerContext';
+import { useResults } from '../../misc/ResultContext';
 
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -35,6 +36,11 @@ const Exercise1 = () => {
   const navigation = useNavigation();
   const {time, setTime, setIsActive} = useTimer();
   const [counter, setCounter] = useState(0);
+  const {updateExerciseData} = useResults();
+  const [index, setIndex] = useState(0);
+  const [wpm, setWpm] = useState(0);
+
+  
 
   const route = useRoute();
   const item = route.params?.Extract;
@@ -56,16 +62,35 @@ const Exercise1 = () => {
     navigation.navigate('ResultScreen');
   }
 
-  finishFunction = () => {
+  const finishFunction = () => {
+    // Assuming setShowContent and stopRecording are to prepare the UI and app state
     setShowContent(false);
-    results();
+    finalTime = time;
+    timeInMintues = finalTime / 60;
+    wordsPerMinute = wordCount / timeInMintues;
+    setWpm(wordsPerMinute);
     resetTimer();
-    
-  }
+};
 
   const onCorrectAnswer = () => {
     setCounter(prevCounter => prevCounter + 1);
+    setIndex(prevIndex => prevIndex + 1);
   };
+
+  const onHandleGuess = () => {
+    checkQuizCompletion();
+  };
+
+  
+  const checkQuizCompletion = () => {
+    const isQuizCompleted = index === totalQuestions - 1;
+    if (isQuizCompleted) {
+      results(); // Assuming `results` prepares and navigates to the results screen
+    } else {
+      setIndex(prevIndex => prevIndex + 1);
+    }
+  };
+
   
 
  
@@ -83,16 +108,22 @@ const Exercise1 = () => {
     console.log('Counter: ', counter);
   }, [counter]);
 
+  
+
+
+
 
   
 
   const results = () => {
-    finalTime = time
-    timeInMintues = finalTime / 60;
-    wordsPerMinute = wordCount / timeInMintues;
-    console.log(time)
-    console.log(timeInMintues)
-    console.log(wordsPerMinute);
+    updateExerciseData('Exercise1', {
+      score: counter,
+      wpm: wpm,
+      tq: totalQuestions,
+    });
+    stopRecording();
+    navResultScreen();
+
 
   }
 
@@ -149,6 +180,8 @@ const Exercise1 = () => {
       pointerEvents: cameraMinimized ? 'box-none' : 'auto', 
   }
 
+ 
+
 
   return (
     <>
@@ -192,7 +225,7 @@ const Exercise1 = () => {
     </View>
     )}
     {!showContent && (
-    <ComprehensionWindow item={item} onCorrectAnswer={onCorrectAnswer} />
+    <ComprehensionWindow item={item} onCorrectAnswer={onCorrectAnswer} onHandleGuess={onHandleGuess} />
     )}
     <View style={{flex: 1}}></View>
     {showContent && (
