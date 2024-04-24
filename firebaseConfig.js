@@ -4,21 +4,27 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from 'uuid';
 
+import { 
+  FIREBASE_API_KEY,
+  FIREBASE_AUTH_DOMAIN,
+  FIREBASE_PROJECT_ID,
+  FIREBASE_STORAGE_BUCKET,
+  FIREBASE_MESSAGING_SENDER_ID,
+  FIREBASE_APP_ID,
+  FIREBASE_MEASUREMENT_ID
+} from '@env'; 
 
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCHXrs3K54AYpg5CD_Ctw2f0wecRTDJWJg",
-  authDomain: "luminary-3eee5.firebaseapp.com",
-  projectId: "luminary-3eee5",
-  storageBucket: "luminary-3eee5.appspot.com",
-  messagingSenderId: "859224782856",
-  appId: "1:859224782856:web:3b71f01555c60b9756f9bd",
-  measurementId: "G-D21KXVW3RJ"
+  apiKey: FIREBASE_API_KEY,
+  authDomain: FIREBASE_AUTH_DOMAIN,
+  projectId: FIREBASE_PROJECT_ID,
+  storageBucket: FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
+  appId: FIREBASE_APP_ID,
+  measurementId: FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase

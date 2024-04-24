@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useRef } from 'react';
 import { uploadVideoAsync } from '../../firebaseConfig';
+import { useNavigation } from '@react-navigation/native';
 
 const RecordingContext = createContext();
 
@@ -11,11 +12,18 @@ export const RecordingProvider = ({ children }) => {
     const [videoUri, setVideoUri] = useState(null);
     const cameraRef = useRef(null);
     const [cameraMinimized, setCameraMinimized] = useState(false);
+    const [uploadDecisionCallback, setUploadDecisionCallback] = useState(null);
+    const [modalVisible, setModalVisible] = useState(false);
 
 
     const toggleCameraMinimized = (cameraMinimized) => {
       setCameraMinimized(cameraMinimized);
     };
+
+    const registerUploadDecisionCallback = (callback) => {
+      setUploadDecisionCallback(() => callback);
+  };
+
 
     const startRecording = async () => {
         if (cameraRef.current) {
@@ -25,7 +33,6 @@ export const RecordingProvider = ({ children }) => {
           setIsRecording(false);
           if (!recording.cancelled) {
             setVideoUri(recording.uri);
-            showModal();
             console.log(visible);
           }
         }
@@ -42,19 +49,21 @@ export const RecordingProvider = ({ children }) => {
 
     
   const handleUploadPress = async () => {
-    setVisible(false);
+    hideModal();
     if (videoUri) {
       try {
         const uploadUrl = await uploadVideoAsync(videoUri);
         console.log('Uploaded video URL:', uploadUrl);
+        
       } catch (error) {
         console.error('Error uploading video:', error);
       }
-    }
+    } 
   };
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
+
 
 
 
@@ -70,6 +79,9 @@ export const RecordingProvider = ({ children }) => {
         toggleCameraMinimized,
         cameraMinimized,
         setCameraMinimized,
+        registerUploadDecisionCallback,
+        showModal,
+        hideModal,
 
     }}>
         {children}

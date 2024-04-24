@@ -29,7 +29,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 const getTabBarVisibility = (route) => {
   const routeName = getFocusedRouteNameFromRoute(route) ?? '';
-  return !['CameraScreen'].includes(routeName);
+  return !['CameraScreen', 'SomethingElse'].includes(routeName);
 }
 
 
@@ -53,6 +53,7 @@ function TabNavigator() {
       headerStyle: {
         backgroundColor: 'blue',
         height : "6%",
+        headerShown: false,
 
       },
       tabBarStyle : {

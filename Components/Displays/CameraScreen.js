@@ -8,7 +8,9 @@ import ModalComponent from './ModalComponent';
 import { useRecording } from '../misc/RecordingContext';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring, runOnJS } from 'react-native-reanimated';
 import { useTimer } from '../misc/TimerContext';
+import CalibrationScreen from './CalibrationScreen';
 
+import { useNavigation } from '@react-navigation/native';
 
 
 import { uploadVideoAsync } from '../../firebaseConfig';
@@ -18,18 +20,22 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const CameraScreen = () => {
-  //const [visible, setVisible] = useState(false);
   const [CameraPermission, setCameraPermission] = useState(null);
   const [MicrophonePermission, setMicrophonePermission] = useState(null);
   const [mediaPermission, setMediaPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.front);
-  //const [isRecording, setIsRecording] = useState(false);
   const [videoUri, setVideoUri] = useState(null);
-  //const cameraRef = useRef(null);
   const [checked, setChecked] = useState(false);
   const { time, setTime,  setIsActive } = useTimer();
+  const navigation = useNavigation();
+  const [calibration, setCalibration] = useState(false);
+  const [active, setActive] = useState(false);
+
+ 
 
   const { setVisible, visible,  startRecording, stopRecording, cameraRef, isRecording , handleUploadPress, toggleCameraMinimized  } = useRecording();
+
+  
 
 
   const width = useSharedValue('100%');
@@ -51,14 +57,21 @@ const CameraScreen = () => {
   const shrinkAndMoveToCorner = (onComplete) => {
     width.value = withSpring('15%');
     height.value = withSpring('20%');
-    bottom.value = withSpring(20); // Adjust as needed
-    left.value = withSpring(20); // Adjust as needed
+    bottom.value = withSpring(20); 
+    left.value = withSpring(20); 
     toggleCameraMinimized(true);
-
-    const animationCallback = {
-      onFinish: () => runOnJS(onComplete)(),
-    }
   };
+
+  navResultScreen = () => {
+    navigation.navigate('ResultScreen');
+  }
+
+  const calibrationToggle = () => {
+    setActive(true); // This will show the CalibrationScreen when button is pressed
+  };
+
+
+
 
 
   
@@ -96,7 +109,6 @@ const CameraScreen = () => {
       stopRecording();
     } else {
       startRecording();
-      //shrinkAndMoveToCorner();
       shrinkAndMoveToCorner();
       setIsActive(true);
 
@@ -105,21 +117,12 @@ const CameraScreen = () => {
 
   const hideModal = () => setVisible(false);
 
-
- 
-
-
-
-  
-
-
-
   return (
     <PaperProvider>
     <Animated.View style={[styles.cameraContainer, animatedStyle]}>
       <Camera style={styles.camera} type={type} ref={cameraRef}>
         <View style={[styles.buttonContainer, { display: isRecording ? "none" : undefined }]}>
-          <TestButton color={isRecording ? 'blue' : 'red'} onPress={handleRecording}/>
+          <TestButton color={isRecording ? 'blue' : 'red'} onPress={calibrationToggle}/>
         </View>
       </Camera>
           
@@ -127,13 +130,18 @@ const CameraScreen = () => {
 
            <ModalComponent
            visible={visible}
-           hideModal={hideModal}
+           hideModal={hideModal && navResultScreen}
            onUploadPress={handleUploadPress}
            isChecked={checked}
            toggleCheckbox={() => setChecked(!checked)}
              text="Would you like to upload this video?"
            />
            </Portal>
+
+
+           {active && (
+        <CalibrationScreen calibrationActive={active} />
+      )}
     </Animated.View>
    </PaperProvider>
   );

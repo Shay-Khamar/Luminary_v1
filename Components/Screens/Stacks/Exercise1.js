@@ -30,15 +30,17 @@ const TextContent = {
 };
 
 const Exercise1 = () => {
-  const { cameraMinimized, stopRecording  } = useRecording();
+  const { cameraMinimized, stopRecording, visible, modalVisible, setModalVisible, showModal, hideModal} = useRecording();
+  const [uploadDecisionMade, setUploadDecisionMade] = useState(false);
   const [showContent, setShowContent] = useState(true);
-  const [visible, setVisible] = useState(false);
+  const [dialogVisible, setDialogVisible] = useState(false);
   const navigation = useNavigation();
   const {time, setTime, setIsActive} = useTimer();
   const [counter, setCounter] = useState(0);
   const {updateExerciseData} = useResults();
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(1);
   const [wpm, setWpm] = useState(0);
+  const [resultsRendered, setResultsRendered] = useState(false);
 
   
 
@@ -52,6 +54,8 @@ const Exercise1 = () => {
 
   const totalQuestions = item?.comprehensionQuestions.length;
 
+  const isQuizCompleted = index === totalQuestions - 1;
+
   const resetTimer = () => {
     setIsActive(false);
     setTime(0);
@@ -63,19 +67,23 @@ const Exercise1 = () => {
   }
 
   const finishFunction = () => {
-    // Assuming setShowContent and stopRecording are to prepare the UI and app state
     setShowContent(false);
-    finalTime = time;
-    timeInMintues = finalTime / 60;
+    timeInMintues = time / 60;
     wordsPerMinute = wordCount / timeInMintues;
     setWpm(wordsPerMinute);
     resetTimer();
 };
 
-  const onCorrectAnswer = () => {
-    setCounter(prevCounter => prevCounter + 1);
-    setIndex(prevIndex => prevIndex + 1);
-  };
+const onCorrectAnswer = () => {
+  setCounter(prevCounter => prevCounter + 1);
+  setIndex(prevIndex => {
+      const newIndex = prevIndex + 1;
+      if (newIndex >= totalQuestions) { 
+          checkQuizCompletion(); 
+      }
+      return newIndex;
+  });
+};
 
   const onHandleGuess = () => {
     checkQuizCompletion();
@@ -83,20 +91,15 @@ const Exercise1 = () => {
 
   
   const checkQuizCompletion = () => {
-    const isQuizCompleted = index === totalQuestions - 1;
     if (isQuizCompleted) {
-      results(); // Assuming `results` prepares and navigates to the results screen
+      console.log('Something happens here');
     } else {
       setIndex(prevIndex => prevIndex + 1);
     }
   };
 
-  
-
- 
-
-  const showDialog = () => setVisible(true);
-  const hideDialog = () => setVisible(false);
+  const showDialog = () => setDialogVisible(true);
+  const hideDialog = () => setDialogVisible(false);
 
   useEffect(() => {
     //Gonna need an if statement to check the state of the visivibility of the camera Screen, probably don't want it showing until after the calibration 
@@ -105,42 +108,28 @@ const Exercise1 = () => {
 
   useEffect(() => {
     //Gonna need an if statement to check the state of the visivibility of the camera Screen, probably don't want it showing until after the calibration 
-    console.log('Counter: ', counter);
-  }, [counter]);
+    if(isQuizCompleted){
+      showModal();
+      stopRecording();
+      renderRusults();
+    }
+  }, [isQuizCompleted]);
+
+  
 
   
 
 
-
-
   
-
-  const results = () => {
+  const renderRusults = () => {
     updateExerciseData('Exercise1', {
       score: counter,
       wpm: wpm,
       tq: totalQuestions,
     });
-    stopRecording();
-    navResultScreen();
+  };
 
-
-  }
-
-
-  /*
-  // In case the app tries to take over the world destory it with this statment.
-  if (item.option == item.answer) {
-    setCounter(counter + 1);
-    console.log("Correct answer");
-  } else {
-    console.log("Incorrect answer");
-  }
-  */
-
-
-
-
+  
   //Really simple just need to get it on the results screen
   /** - This should be simple I just need to write an if else condition
    * - That checks the users answer against the correct answer
@@ -185,7 +174,7 @@ const Exercise1 = () => {
 
   return (
     <>
-    <DialogBoxComponent visible={visible} onDismiss={hideDialog} Title={'Just Before Start'}>
+    <DialogBoxComponent visible={dialogVisible} onDismiss={hideDialog} Title={'Just Before Start'}>
       <TouchableOpacity onPress={readTextAloud}><FontAwesome name="volume-up" size={24} color="black" /></TouchableOpacity>
       <Text style={styles.DialogText}>
       <Text style={styles.subheading}>Your Journey, Your Control:</Text>{TextContent.intro}
