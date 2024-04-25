@@ -13,8 +13,6 @@ import {ResultProvider} from './Components/misc/ResultContext';
 import { useFonts } from 'expo-font';
 
 
-import { DimensionsProvider } from './Components/misc/DimensionContext';
-
 
 import Home from './Components/Screens/BottomTabs/Home';
 import ExampleScreen from './Components/Screens/Stacks/ExampleScreen';
@@ -53,7 +51,7 @@ function TabNavigator() {
       headerStyle: {
         backgroundColor: 'blue',
         height : "6%",
-        headerShown: false,
+        headerShown: "false",
 
       },
       tabBarStyle : {

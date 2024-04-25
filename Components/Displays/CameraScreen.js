@@ -28,12 +28,21 @@ const CameraScreen = () => {
   const [checked, setChecked] = useState(false);
   const { time, setTime,  setIsActive } = useTimer();
   const navigation = useNavigation();
-  const [calibration, setCalibration] = useState(false);
+ 
   const [active, setActive] = useState(false);
 
  
 
   const { setVisible, visible,  startRecording, stopRecording, cameraRef, isRecording , handleUploadPress, toggleCameraMinimized  } = useRecording();
+
+
+  const handleCalibrationComplete = async () => {
+    setActive(false);  // Turn off calibration
+
+    // Trigger recording after calibration
+    shrinkAndMoveToCorner();
+      setIsActive(true);
+  };
 
   
 
@@ -54,7 +63,7 @@ const CameraScreen = () => {
   });
 
 
-  const shrinkAndMoveToCorner = (onComplete) => {
+  const shrinkAndMoveToCorner = () => {
     width.value = withSpring('15%');
     height.value = withSpring('20%');
     bottom.value = withSpring(20); 
@@ -66,8 +75,13 @@ const CameraScreen = () => {
     navigation.navigate('ResultScreen');
   }
 
-  const calibrationToggle = () => {
+  const calibrationToggle = async () => {
     setActive(true); // This will show the CalibrationScreen when button is pressed
+
+    if (!isRecording) {
+      await startRecording();
+      // Do not shrink or start timer here
+    }
   };
 
 
@@ -108,10 +122,9 @@ const CameraScreen = () => {
     if (isRecording) {
       stopRecording();
     } else {
-      startRecording();
       shrinkAndMoveToCorner();
       setIsActive(true);
-
+      
     }
   };
 
@@ -140,7 +153,7 @@ const CameraScreen = () => {
 
 
            {active && (
-        <CalibrationScreen calibrationActive={active} />
+        <CalibrationScreen calibrationActive={active} onCalibrationComplete={handleCalibrationComplete} />
       )}
     </Animated.View>
    </PaperProvider>

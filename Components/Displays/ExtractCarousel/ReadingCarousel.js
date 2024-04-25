@@ -11,7 +11,7 @@ const ReadingCarousel = () => {
   const isCarousel = React.useRef(null);
 
   const renderItem = ({item, index}) => (
-    <ReadingCarouselItem item={item} index={index} navigation={navigation} /> // Passing navigation as a prop worked
+    <ReadingCarouselItem  item={item} index={index} navigation={navigation} /> // Passing navigation as a prop worked
   );
 
   return (

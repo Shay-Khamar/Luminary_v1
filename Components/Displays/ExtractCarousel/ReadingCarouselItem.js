@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet, Dimensions,TouchableOpacity} from "react-native"
 import { useNavigation } from '@react-navigation/native';
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
+
+
 
 
 export const SLIDER_WIDTH = Dimensions.get('window').width + 80
@@ -8,7 +10,16 @@ export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
 
 
-const ReadingCarouselItem = ({item, index, navigation}) => {
+const ReadingCarouselItem = ({item, index, navigation, }) => {
+
+  const windowWidth = Dimensions.get('window').width
+  const windowHeight = Dimensions.get('window').height
+
+  useEffect(() => {
+    console.log("width " + windowWidth)
+    console.log("height " +windowHeight)
+  }, [windowWidth, windowHeight])
+
  
 
   return (

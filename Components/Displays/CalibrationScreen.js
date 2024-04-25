@@ -6,9 +6,19 @@ import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-na
 const { width, height } = Dimensions.get('window');
 const directions = ['lets begin', 'top-left', 'top-right', 'bottom-left', 'bottom-right', 'center'];
 
-const CalibrationScreen = ({ calibrationActive }) => {
+const CalibrationScreen = ({ calibrationActive, onCalibrationComplete }) => {
     const position = useSharedValue({ x: 0, y: 0 });
     const [index, setIndex] = useState(0);
+    const [calibrationCompleted, setCalibrationCompleted] = useState(false);
+
+    useEffect(() => {
+        if (calibrationCompleted) {
+            onCalibrationComplete();
+            setCalibrationCompleted(false); // Reset the completion state
+        }
+    }, [calibrationCompleted, onCalibrationComplete]);
+
+
 
     useEffect(() => {
         if (calibrationActive) {
@@ -26,15 +36,20 @@ const CalibrationScreen = ({ calibrationActive }) => {
                         moveSquare(directions[currentIndex + 1]);
                         return currentIndex + 1;
                     } else {
+                        moveSquare(directions[currentIndex]);
                         clearInterval(interval);
+                        setCalibrationCompleted(true);
                         return currentIndex; 
                     }
                 });
             }, 5000);  // Delay between movements
 
-            return () => clearInterval(interval);
+            return () => {
+                setCalibrationCompleted(false);
+                clearInterval(interval);
+            }
         }
-    }, [calibrationActive]);
+    }, [calibrationActive,  setCalibrationCompleted]);
 
     const moveSquare = (direction) => {
         let newX = 0;
@@ -49,8 +64,8 @@ const CalibrationScreen = ({ calibrationActive }) => {
                 newY = -width / 2.5;
                 break;
             case 'bottom-left':
-                newX = -height / 3;
-                newY = width / 3;
+                newX = -height / 2.5;
+                newY = width / 2.5;
                 break;
             case 'bottom-right':
                 newX = height / 2.5;
