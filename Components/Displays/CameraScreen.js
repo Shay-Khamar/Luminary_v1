@@ -143,8 +143,11 @@ const CameraScreen = () => {
 
            <ModalComponent
            visible={visible}
+           /**
+            * This solution to the navResultScreen function is not ideal, but it works for now.
+            */
            hideModal={hideModal && navResultScreen}
-           onUploadPress={handleUploadPress}
+           onUploadPress={handleUploadPress && navResultScreen}
            isChecked={checked}
            toggleCheckbox={() => setChecked(!checked)}
              text="Would you like to upload this video?"
