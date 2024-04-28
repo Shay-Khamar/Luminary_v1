@@ -16,8 +16,7 @@ import { useNavigation } from '@react-navigation/native';
 import { uploadVideoAsync } from '../../firebaseConfig';
 import { set } from 'firebase/database';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const { width, height } = Dimensions.get('window');
 
 const CameraScreen = () => {
   const [CameraPermission, setCameraPermission] = useState(null);
@@ -28,6 +27,7 @@ const CameraScreen = () => {
   const [checked, setChecked] = useState(false);
   const { time, setTime,  setIsActive } = useTimer();
   const navigation = useNavigation();
+  const [allowInteraction, setAllowInteraction] = useState(true); 
  
   const [active, setActive] = useState(false);
 
@@ -47,30 +47,34 @@ const CameraScreen = () => {
   
 
 
-  const width = useSharedValue('100%');
-  const height = useSharedValue('100%');
-  const bottom = useSharedValue(0);
-  const left = useSharedValue(0);
+  const scale = useSharedValue(1); // Start with the original size
+const translateY = useSharedValue(0); // Start at original vertical position
+const translateX = useSharedValue(0); // Start at original horizontal position
 
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      width: width.value,
-      height: height.value,
-      position: 'absolute',
-      bottom: bottom.value,
-      left: left.value,
-    };
-  });
-
-
-  const shrinkAndMoveToCorner = () => {
-    width.value = withSpring('15%');
-    height.value = withSpring('20%');
-    bottom.value = withSpring(20); 
-    left.value = withSpring(20); 
-    toggleCameraMinimized(true);
+const animatedStyle = useAnimatedStyle(() => {
+  return {
+    transform: [
+      { scale: scale.value },
+      { translateY: translateY.value },
+      { translateX: translateX.value }
+    ],
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    pointerEvents: allowInteraction ? 'auto' : 'none',
   };
+});
 
+const shrinkAndMoveToCorner = () => {
+  scale.value = withSpring(0.15);
+  nowMoveIt(); 
+  runOnJS(setAllowInteraction)(true);
+};
+
+const nowMoveIt = () => {
+  translateY.value = withSpring(height * 1.5);
+  translateX.value = withSpring(-width * 4.6)
+};
   navResultScreen = () => {
     navigation.navigate('ResultScreen');
   }
@@ -113,7 +117,7 @@ const CameraScreen = () => {
   }, []);
 
 
-
+  /*
   if (CameraPermission === null || MicrophonePermission === null) {
     return <ActivityIndicator animating={true} color="#000" />;
   }
@@ -127,6 +131,12 @@ const CameraScreen = () => {
       
     }
   };
+  */
+
+  const randomfunction = async () => {
+    handleUploadPress();
+    await navResultScreen();
+  }
 
   const hideModal = () => setVisible(false);
 
@@ -147,7 +157,7 @@ const CameraScreen = () => {
             * This solution to the navResultScreen function is not ideal, but it works for now.
             */
            hideModal={hideModal && navResultScreen}
-           onUploadPress={handleUploadPress && navResultScreen}
+           onUploadPress={randomfunction}
            isChecked={checked}
            toggleCheckbox={() => setChecked(!checked)}
              text="Would you like to upload this video?"
@@ -168,11 +178,13 @@ export default CameraScreen;
 const styles = StyleSheet.create({
   cameraContainer: {
     flex: 1,
-    borderRadius: 20,
+    width: '100%',
+    height: '100%',
+    
   },
   camera: {
-    flex: 1,
-    borderRadius: 20,
+    flex  : 1,
+    backgroundColor: 'rgba(255, 0, 0, 0.6)',
   },
   buttonContainer: {
     position: 'absolute',

@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import CameraScreen from '../../Displays/CameraScreen';
 import { useRecording } from '../../misc/RecordingContext';
 import ComprehensionWindow from '../../Displays/ComprehensionWindow';
-import  AwesomeButton  from 'react-native-really-awesome-button';
+import { ThemedButton } from "react-native-really-awesome-button";
 import { useTimer } from '../../misc/TimerContext';
 import { useResults } from '../../misc/ResultContext';
 
@@ -165,8 +165,8 @@ const onCorrectAnswer = () => {
       left: 0,
       right: 0,
       bottom: 0,
-      zIndex: 10, // Ensure it's above other components
-      pointerEvents: cameraMinimized ? 'box-none' : 'auto', 
+      zIndex: 10, 
+      pointerEvents: cameraMinimized ? 'auto' : 'box-none', 
   }
 
  
@@ -196,8 +196,11 @@ const onCorrectAnswer = () => {
     <FontProvider>
     <View style={styles.container}>
       <View style={styles.header}>
-      <Text style={styles.title}>Exercise 1 Screen</Text>
-      <Text>Timer: {time}</Text>
+      <Text style={styles.title}>COMPREHENSION</Text>
+      <View style={styles.timerContainer}>
+      <Text style={styles.timerLabel}>Time:</Text>
+      <Text style={styles.timerValue}>{time}</Text>
+      </View>
       <FontDropDown />
       </View>
       <View style={styles.centeredBoxContainer}>
@@ -218,7 +221,7 @@ const onCorrectAnswer = () => {
     )}
     <View style={{flex: 1}}></View>
     {showContent && (
-    <AwesomeButton onPressIn={finishFunction} width={300}>Finish</AwesomeButton>
+    <ThemedButton name="bruce" onPressIn={finishFunction} width={250} height={115}  type="secondary" textSize={40} borderRadius={25}>Finish</ThemedButton>
     )}
     </View>
     </View>
@@ -241,6 +244,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
+    backgroundColor: '#cfcfdb'
   },
 
   tester: {
@@ -255,7 +259,8 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 30,
+    alignItems: 'center',
+    padding: 20,
   },
 
 
@@ -278,18 +283,18 @@ const styles = StyleSheet.create({
     width: '65%',
     height: '75%',
     backgroundColor: '#f0f0f0',
-    borderWidth: 1,
-    borderColor: '#d0d0d0', // Border color for depth
+    borderWidth: 3,
+    borderColor: '#000000',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 12,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5, // For Android shadow effect
-    borderRadius: 1,
-  },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 12,
+    borderRadius: 35,
+},
 
   centeredBoxContainer: {
     flex: 1,
@@ -308,7 +313,24 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  trash : {
-    algihtItems: 'flex-end',
-  }
+  timerContainer: {
+    flexDirection: 'column', // aligns children in a column
+    alignItems: 'center', // centers children horizontally
+  },
+  timerLabel: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'grey'
+  },
+  timerValue: {
+    fontSize: 25,
+    color: 'grey',
+    fontWeight: 'bold'
+  },
+
+
+
+
+
+
 });

@@ -6,6 +6,8 @@ const RecordingContext = createContext();
 
 export const useRecording = () => useContext(RecordingContext);
 
+
+
 export const RecordingProvider = ({ children }) => {
     const [visible, setVisible] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
@@ -23,6 +25,10 @@ export const RecordingProvider = ({ children }) => {
     const registerUploadDecisionCallback = (callback) => {
       setUploadDecisionCallback(() => callback);
   };
+
+  navResultScreen = () => {
+    navigation.navigate('ResultScreen');
+  }
 
 
     const startRecording = async () => {
@@ -52,6 +58,8 @@ export const RecordingProvider = ({ children }) => {
     hideModal();
     if (videoUri) {
       try {
+        navResultScreen();
+        
         const uploadUrl = await uploadVideoAsync(videoUri);
         console.log('Uploaded video URL:', uploadUrl);
         

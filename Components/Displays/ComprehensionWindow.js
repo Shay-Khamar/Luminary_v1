@@ -59,6 +59,8 @@ const styles = StyleSheet.create({
     height: '70%',
     width: '40%', // Adjusted for better visibility
     borderRadius: 20,
+    borderColor: '#000',
+    borderWidth: 2,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -72,11 +74,12 @@ const styles = StyleSheet.create({
   QuestionHeader: {
     fontSize: 24,
     textAlign: 'center',
+    padding: '2%',
   },
 
   OptionsContainer: {
     flexDirection: 'column',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
   },

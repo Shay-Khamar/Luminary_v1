@@ -28,9 +28,9 @@ const FontDropDown = () => {
           setFontFamily(selectedFont);
         }} 
         data={fontData} 
-        placeholder="Select a font"
-        boxStyles={{borderRadius: 5}} 
-        dropdownTextStyles={{fontSize: 16}} 
+        placeholder={fontData.find(font => font.value === fontFamily)?.key || 'sans-serif'}
+        boxStyles={{borderRadius: 10, backgroundColor: '#f0f0f0', padding: 20, borderColor: '#000', borderWidth: 2}} 
+        dropdownTextStyles={{fontSize: 16, fontWeight: 'bold', color: '#000'}} 
         search={false} 
       />
     );

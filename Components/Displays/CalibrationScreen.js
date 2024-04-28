@@ -56,20 +56,20 @@ const CalibrationScreen = ({ calibrationActive, onCalibrationComplete }) => {
         let newY = 0;
         switch (direction) {
             case 'top-left':
-                newX = -height / 2.5;
-                newY = -width / 2.5;
+                newX = -height / 2.2;
+                newY = -width / 2.4;
                 break;
             case 'top-right':
-                newX = height / 2.5;
-                newY = -width / 2.5;
+                newX = height / 2.2;
+                newY = -width / 2.4;
                 break;
             case 'bottom-left':
-                newX = -height / 2.5;
-                newY = width / 2.5;
+                newX = -height / 2.2;
+                newY = width / 2.4;
                 break;
             case 'bottom-right':
-                newX = height / 2.5;
-                newY = width / 2.5;
+                newX = height / 2.2;
+                newY = width / 2.4;
                 break;
             case 'center':
                 newX = 0;
