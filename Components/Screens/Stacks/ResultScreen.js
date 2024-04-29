@@ -12,7 +12,7 @@ const ResultScreen = () => {
       case  'Exercise1':
         return (
           <View>
-            <Text>WPM: {exerciseData.results.wpm}</Text>
+            <Text>WPM: {Math.floor(exerciseData.results.wpm)}</Text>
             <Text>Score:{exerciseData.results.score} / {exerciseData.results.tq}</Text>
           </View>
         )
