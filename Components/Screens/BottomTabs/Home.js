@@ -2,16 +2,17 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import {ThemedButton} from "react-native-really-awesome-button";
 import { useNavigation } from '@react-navigation/native';
-import CameraScreen from '../../Displays/CameraScreen'
 import ReadingCatalogue from '../Stacks/ReadingCatalogue';
+import ExerciseButton from '../../Buttons/ExerciseButton';
+import Exercise2 from '../Stacks/Exercise2';
 
 
 const Home = () => {
 
 const navigation = useNavigation();
 
-const toCamera = () => {
-  navigation.navigate('CameraScreen');
+const Exercise2 = () => {
+  navigation.navigate('Exercise2');
 }
 
 const ExtractSelectScreen = () => {
@@ -19,10 +20,10 @@ const ExtractSelectScreen = () => {
 }
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>This is what the home screen looks like</Text>
+      <Text style={styles.textStyle}>Welcome To Luminary !</Text>
       <View style={styles.buttonLayout}>
-      <ThemedButton name="bruce" type="primary" style={styles.button} width={100} onPressOut={toCamera} backgroundColor={"#000"} textSize={15} >Launch Camera </ThemedButton>
-      <ThemedButton name="bruce" type="primary" style={styles.button} width={100} onPressOut={ExtractSelectScreen} backgroundColor={"purple"} >Exercise 1#</ThemedButton>
+      <ExerciseButton onPress={Exercise2} Title="Spelling Coming Soon !"/>
+      <ExerciseButton onPress={ExtractSelectScreen} Title="Comprehension Task"/>
       </View>
     </View>
   )
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
 
   buttonLayout : {
     flexDirection: 'row',
-    padding: 10,
+
 
   },
 

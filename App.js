@@ -21,7 +21,8 @@ import SomethingElse from './Components/Screens/BottomTabs/SomethingElse';
 import CameraScreen from './Components/Displays/CameraScreen';
 import ReadingCatalogue from './Components/Screens/Stacks/ReadingCatalogue';
 import Exercise1 from './Components/Screens/Stacks/Exercise1';
-import ResultScreen from './Components/Screens/Stacks/ResultScreen';
+import ResultScreen from './Components/Screens/Stacks/ResultScreen'; 
+import Exercise2 from './Components/Screens/Stacks/Exercise2';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -34,13 +35,16 @@ const getTabBarVisibility = (route) => {
 
 function StackNavigator() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="HomeTab" component={TabNavigator} />
+    <Stack.Navigator
+    options={{headerShown: false}}
+    >
+      <Stack.Screen name="HomeTab" options={{headerShown: false}} component={TabNavigator} />
       <Stack.Screen options={{ headerShown: false}} name="CameraScreen" component={CameraScreen} />
       <Stack.Screen name="ExampleScreen" component={ExampleScreen} />
       <Stack.Screen options={{headerShown: false}} name="ReadingCatalogue" component={ReadingCatalogue} />
       <Stack.Screen options={{headerShown: false}} name="Exercise1" component={Exercise1} />
       <Stack.Screen options={{headerShown: false}} name="ResultScreen" component={ResultScreen} />
+      <Stack.Screen options={{headerShown: false}} name="Exercise2" component={Exercise2} />
     </Stack.Navigator>
   );
 }
@@ -52,7 +56,7 @@ function TabNavigator() {
       headerStyle: {
         backgroundColor: 'blue',
         height : "6%",
-        headerShown: "false",
+        headerShown: false,
 
       },
       tabBarStyle : {

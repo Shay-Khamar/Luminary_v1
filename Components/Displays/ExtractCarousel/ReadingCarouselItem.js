@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet, Dimensions,TouchableOpacity} from "react-native"
 import { useNavigation } from '@react-navigation/native';
 import React, {useContext, useEffect} from 'react'
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 
 
@@ -26,8 +28,14 @@ const ReadingCarouselItem = ({item, index, navigation, }) => {
     <TouchableOpacity style={styles.container} key={index}  onPress={() => navigation.navigate('Exercise1', { Extract: item })} >
       <Text style={styles.header}>{item.title}</Text>
       <View style={styles.something}>
-      <Text>{item.difficultyLevel}</Text>
+      <View style={styles.difficulty}>
+      <FontAwesome5 name="mountain" size={24} color="black" />
+      <Text style={styles.somethingText}>{item.difficultyLevel}</Text>
+      </View>
+      <View style={styles.genre}>
+      <FontAwesome name="book" size={24} color="black" />
       <Text style={styles.somethingText}>{item.category}</Text>
+      </View>
       </View>
     </TouchableOpacity>
   )
@@ -56,6 +64,7 @@ const styles = StyleSheet.create({
 
   header: {
     flex: 1,
+    textAlign: 'center',
     paddingTop: 10,
     color: 'black',
     fontWeight: 'bold',
@@ -64,15 +73,29 @@ const styles = StyleSheet.create({
 
   something: {
     fontWeight: 'bold',
-    backgroundColor: 'rgba(0,0,0,1)',
     zIndex: 100,
     padding: 10,
     opacity: 0.7,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 
   somethingText:{
     fontWeight: 'bold',
-    color: 'white',
     fontSize: 30,
+  },
+
+  difficulty: {
+    backgroundColor: 'red',
+    padding: 5,
+    borderRadius: 5,
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+
+  genre: {
+    alignItems: 'center',
+    flexDirection: 'column',
+
   }
 })

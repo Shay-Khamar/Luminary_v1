@@ -41,6 +41,7 @@ const Exercise1 = () => {
   const [index, setIndex] = useState(1);
   const [wpm, setWpm] = useState(0);
   const [resultsRendered, setResultsRendered] = useState(false);
+  const [timerVisible, setTimerVisible] = useState(true);
 
   
 
@@ -196,11 +197,22 @@ const onCorrectAnswer = () => {
     <FontProvider>
     <View style={styles.container}>
       <View style={styles.header}>
-      <Text style={styles.title}>COMPREHENSION</Text>
-      <View style={styles.timerContainer}>
-      <Text style={styles.timerLabel}>Time:</Text>
+      <Text style={styles.title}>{item?.title}</Text>
+      <View style={styles.timerWrapper}>
+      <TouchableOpacity
+      style={styles.timerContainer}
+      onPress={() => setTimerVisible(!timerVisible)}
+      >
+        {timerVisible &&(
+          <>
+        <Text style={styles.timerLabel}>Time:</Text>
       <Text style={styles.timerValue}>{time}</Text>
+      </>
+      )}
+
+      </TouchableOpacity>
       </View>
+      
       <FontDropDown />
       </View>
       <View style={styles.centeredBoxContainer}>
@@ -228,7 +240,7 @@ const onCorrectAnswer = () => {
     </FontProvider>
 
     <View style={cameraScreenContainerStyle}>
-    <CameraScreen />
+    <CameraScreen/>
     </View>
 
     </>
@@ -247,20 +259,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#cfcfdb'
   },
 
-  tester: {
-    position: 'absolute', // Position it relative to the container's boundaries
-    right: 20, // Distance from the right edge of the container
-    bottom: 20, // Distance from the bottom edge of the container
-    justifyContent: 'center',
+  timerWrapper: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     alignItems: 'center',
-
   },
+
+
 
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     padding: 20,
+    position: 'relative',
+    justifyContent: 'space-between',
+    marginTop: 10,
   },
 
 
@@ -301,6 +317,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 10,
+
   },
 
   DialogText: {
@@ -314,9 +331,14 @@ const styles = StyleSheet.create({
   },
 
   timerContainer: {
-    flexDirection: 'column', // aligns children in a column
-    alignItems: 'center', // centers children horizontally
-  },
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ddd',
+    borderRadius: 40, // Half of width and height for circle
+    width: 80,
+    height: 80,
+},
+
   timerLabel: {
     fontSize: 20,
     fontWeight: 'bold',

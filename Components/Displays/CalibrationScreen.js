@@ -91,10 +91,10 @@ const CalibrationScreen = ({ calibrationActive, onCalibrationComplete }) => {
     return (
         <View style={styles.overlay}>
             {calibrationActive && (
-                <>
-                    <Text>{directions[index]}</Text>
-                    <Animated.View style={[styles.square, animatedStyles]} />
-                </>
+                <Animated.View style={[styles.squareContainer, animatedStyles]}>
+                    <Text style={styles.instructionText}>{directions[index]}</Text>
+                    <View style={styles.square} />
+                </Animated.View>
             )}
         </View>
     );
@@ -109,11 +109,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    squareContainer: {
+        alignItems: 'center',
+    },
+    instructionText: {
+        marginBottom: 10,
+    },
     square: {
         width: 50,
         height: 50,
         backgroundColor: 'blue',
-    }
+    },
 });
 
 export default CalibrationScreen;

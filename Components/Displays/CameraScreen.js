@@ -9,8 +9,10 @@ import { useRecording } from '../misc/RecordingContext';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring, runOnJS } from 'react-native-reanimated';
 import { useTimer } from '../misc/TimerContext';
 import CalibrationScreen from './CalibrationScreen';
+import { Ionicons } from '@expo/vector-icons';
 
 import { useNavigation } from '@react-navigation/native';
+import { ThemedButton } from 'react-native-really-awesome-button';
 
 
 import { uploadVideoAsync } from '../../firebaseConfig';
@@ -142,12 +144,19 @@ const nowMoveIt = () => {
 
   return (
     <PaperProvider>
-    <Animated.View style={[styles.cameraContainer, animatedStyle]}>
-      <Camera style={styles.camera} type={type} ref={cameraRef}>
-        <View style={[styles.buttonContainer, { display: isRecording ? "none" : undefined }]}>
-          <TestButton color={isRecording ? 'blue' : 'red'} onPress={calibrationToggle}/>
-        </View>
-      </Camera>
+     <Animated.View style={[styles.cameraContainer, animatedStyle]}>
+        <Camera style={styles.camera} type={type} ref={cameraRef}>
+          <TouchableOpacity
+            style={[styles.backButton,{ display: isRecording ? "none" : undefined }]}
+            onPress={() => navigation.goBack()}
+          >
+            <Ionicons name="arrow-back" size={40} color="white" />
+          </TouchableOpacity>
+          <View style={[styles.buttonContainer, { display: isRecording ? "none" : undefined }]}>
+          <ThemedButton name="bruce" onPressIn={calibrationToggle} width={250} height={115}  type="secondary" textSize={40} borderRadius={25}>Begin Calibration</ThemedButton>
+
+          </View>
+        </Camera>
           
           <Portal>
 
@@ -187,13 +196,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 0, 0, 0.6)',
   },
   buttonContainer: {
+     position: 'absolute',
+        left: 0,
+        right: 0,
+        bottom: 40, // Adjust as needed
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 10
+  },
+
+  backButton: {
     position: 'absolute',
-    right: 0,
-    top: 0,
-    bottom: 0,
-    justifyContent: 'center',
-    paddingRight: 10,
-    zIndex: 10,
+    top: 40,
+    left: 20,
+    zIndex: 11,  // ensure it's on top
   },
 
 });

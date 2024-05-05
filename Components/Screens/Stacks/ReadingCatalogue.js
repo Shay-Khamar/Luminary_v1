@@ -1,11 +1,28 @@
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import ReadingCarousel from '../../Displays/ExtractCarousel/ReadingCarousel'
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { startAfter } from 'firebase/database';
 
 const ReadingCatalogue = () => {
+  const navigation = useNavigation();
+
+  const handleBackPress = () => {
+    navigation.goBack();
+  }
   return (
     <View style={styles.container}>
-        <Text style={styles.pageHeader}>What Would You Like To Read?</Text>
+      <View style={styles.header}>
+        <View style={styles.backButton}>
+        <TouchableOpacity
+                onPress={handleBackPress}
+            >
+              <Ionicons name="arrow-back" size={50} color="black" />
+            </TouchableOpacity>
+        </View>
+      </View>
+      <Text style={styles.pageHeader}>What Would You Like To Read?</Text>
         <ReadingCarousel/>
     </View>
   )
@@ -19,10 +36,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  pageHeader:{
+  backButton: {
+    position: 'absolute',
+    top: 40,
+    left: 10,
+  },
+  pageHeader: {
     fontSize: 60,
     fontWeight: 'bold',
-    textAlign: 'left',
+    textAlign: 'center',
     padding: 30,
-  }
+  },
+  header: {
+    flexDirection: 'row',
+    width: '100%',
+  },
 })
