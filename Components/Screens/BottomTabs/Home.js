@@ -22,7 +22,7 @@ const ExtractSelectScreen = () => {
     <View style={styles.container}>
       <Text style={styles.textStyle}>Welcome To Luminary !</Text>
       <View style={styles.buttonLayout}>
-      <ExerciseButton onPress={Exercise2} Title="Spelling Coming Soon !"/>
+      <ExerciseButton onPress={Exercise2} Title="SPEED TASK"/>
       <ExerciseButton onPress={ExtractSelectScreen} Title="Comprehension Task"/>
       </View>
     </View>

@@ -16,6 +16,15 @@ const ResultScreen = () => {
             <Text>Score:{exerciseData.results.score} / {exerciseData.results.tq}</Text>
           </View>
         )
+      case 'Exercise2':
+        return (
+          <View>
+            <Text>Rate:{(exerciseData.results.rate.toFixed(2))} items/sec</Text>
+            <Text>Average Response Time: {(exerciseData.results.responseTime.toFixed(2))} ms</Text>
+            <Text>Errors: {Math.floor(exerciseData.results.errors)}</Text>
+          </View>
+        )
+
   }
   }
 
