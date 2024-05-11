@@ -16,19 +16,19 @@ const colours = {
     ////////// The main colours and themes I want to use for my UI
     
     //Light theme
-    text: '#09090c',
-    background: '#f9f9fb',
-    primary: '#6c6da3',
-    secondary: '#a2a3c8',
-    accent: '#8586bc',
+    text: 'rgba(22, 14, 8)',
+    background: 'rgba(251, 246, 244)',
+    primary: 'rgba(213, 127, 52)',
+    secondary: 'rgba(238, 180, 129)',
+    accent: 'rgb(242, 158, 84',
 
-    /*Dark Theme
-    text: #f3f3f6;
-    background: #040406;
-    primary: #5c5d93;
-    secondary: #37385d;
-    accent: #43447a;
-    */
+    /*
+ text: 'rgb(247, 239, 233)',
+  background: 'rgb(11, 6, 4)',
+  primary: 'rgb(203, 117, 42)',
+  secondary: 'rgb(126, 68, 17)',
+  accent: 'rgb(171, 87, 13)',
+  */
 
 };
 

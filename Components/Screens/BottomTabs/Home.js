@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import ReadingCatalogue from '../Stacks/ReadingCatalogue';
 import ExerciseButton from '../../Buttons/ExerciseButton';
 import Exercise2 from '../Stacks/Exercise2';
+import colours from '../../../colours';
 
 
 const Home = () => {
@@ -36,7 +37,8 @@ const styles = StyleSheet.create({
   container : {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: colours.background,
   },
 
   buttonLayout : {
@@ -49,5 +51,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 10,
     fontFamily: 'OpenDyslexic',
+    color: colours.text,
   },
 })

@@ -119,23 +119,9 @@ const nowMoveIt = () => {
   }, []);
 
 
-  /*
-  if (CameraPermission === null || MicrophonePermission === null) {
-    return <ActivityIndicator animating={true} color="#000" />;
-  }
+  
 
-  const handleRecording = async () => {
-    if (isRecording) {
-      stopRecording();
-    } else {
-      shrinkAndMoveToCorner();
-      setIsActive(true);
-      
-    }
-  };
-  */
-
-  const randomfunction = async () => {
+  const navigateToResultScreen = async () => {
     handleUploadPress();
     await navResultScreen();
   }
@@ -166,7 +152,7 @@ const nowMoveIt = () => {
             * This solution to the navResultScreen function is not ideal, but it works for now.
             */
            hideModal={hideModal && navResultScreen}
-           onUploadPress={randomfunction}
+           onUploadPress={navigateToResultScreen}
            isChecked={checked}
            toggleCheckbox={() => setChecked(!checked)}
              text="Would you like to upload this video?"
