@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import React, {useContext, useEffect} from 'react'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import colours from "../../../colours";
 
 
 
@@ -29,11 +30,11 @@ const ReadingCarouselItem = ({item, index, navigation, }) => {
       <Text style={styles.header}>{item.title}</Text>
       <View style={styles.something}>
       <View style={styles.difficulty}>
-      <FontAwesome5 name="mountain" size={24} color="black" />
+      <FontAwesome5 name="mountain" size={24} color={colours.primary} />
       <Text style={styles.somethingText}>{item.difficultyLevel}</Text>
       </View>
       <View style={styles.genre}>
-      <FontAwesome name="book" size={24} color="black" />
+      <FontAwesome name="book" size={24} color={colours.primary} />
       <Text style={styles.somethingText}>{item.category}</Text>
       </View>
       </View>
@@ -46,7 +47,7 @@ export default ReadingCarouselItem
 const styles = StyleSheet.create({
 
   container: {
-    backgroundColor: 'white',
+    backgroundColor: colours.background,
     borderRadius: 8,
     width: ITEM_WIDTH,
     height: '50%',
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     paddingTop: 10,
-    color: 'black',
+    color : colours.text,
     fontWeight: 'bold',
     fontSize: 70,
   },
@@ -83,10 +84,10 @@ const styles = StyleSheet.create({
   somethingText:{
     fontWeight: 'bold',
     fontSize: 30,
+    color: colours.text,
   },
 
   difficulty: {
-    backgroundColor: 'red',
     padding: 5,
     borderRadius: 5,
     flexDirection: 'column',

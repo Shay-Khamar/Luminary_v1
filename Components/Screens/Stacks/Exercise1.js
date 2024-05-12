@@ -15,7 +15,6 @@ import { ThemedButton } from "react-native-really-awesome-button";
 import { useTimer } from '../../misc/TimerContext';
 import { useResults } from '../../misc/ResultContext';
 
-
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 

@@ -4,6 +4,7 @@ import ReadingCarousel from '../../Displays/ExtractCarousel/ReadingCarousel'
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { startAfter } from 'firebase/database';
+import colours from '../../../colours';
 
 const ReadingCatalogue = () => {
   const navigation = useNavigation();
@@ -18,7 +19,7 @@ const ReadingCatalogue = () => {
         <TouchableOpacity
                 onPress={handleBackPress}
             >
-              <Ionicons name="arrow-back" size={50} color="black" />
+              <Ionicons name="arrow-back" size={50} color={colours.accent} />
             </TouchableOpacity>
         </View>
       </View>
@@ -32,7 +33,7 @@ export default ReadingCatalogue
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     alignItems: 'center',
   },
 

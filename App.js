@@ -11,6 +11,8 @@ import { TimerProvider } from './Components/misc/TimerContext';
 import * as ScreenOrientation from 'expo-screen-orientation'
 import {ResultProvider} from './Components/misc/ResultContext';
 import { useFonts } from 'expo-font';
+import colours from  './colours'
+import { Entypo, AntDesign } from '@expo/vector-icons';
 
 
 
@@ -52,20 +54,41 @@ function StackNavigator() {
 function TabNavigator() {
   return (
     <Tab.Navigator
+    barStyle={{ backgroundColor: colours.secondary }}
+    tabBarActiveBackgroundColor={colours.primary}
+
+
     screenOptions={({route}) => ({
       headerStyle: {
-        backgroundColor: 'blue',
-        height : "6%",
+        height : "10%",
         headerShown: false,
 
       },
       tabBarStyle : {
         display: getTabBarVisibility(route) ? "none" : "flex",
-      }  
+      }, 
+
+      
     })}
     >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="SomethingElse" component={SomethingElse} />
+      <Tab.Screen 
+      name="Home" 
+      component={Home}
+      options={{
+        tabBarIcon: ({color , size}) => (
+          <Entypo name="home" size={24} color="black" />
+        ),
+      }}  
+      />
+      <Tab.Screen 
+      name="About" 
+      component={SomethingElse}
+      options={{
+        tabBarIcon: ({color , size}) => (
+          <AntDesign name="exclamationcircle" size={24} color="black" />
+        ),
+      }}
+      />
     </Tab.Navigator>
   );
 };
