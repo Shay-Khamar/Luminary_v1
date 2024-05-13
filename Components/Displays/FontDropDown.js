@@ -4,7 +4,10 @@ import { useFont } from '../misc/FontContext';
 import { useFonts } from 'expo-font';
 import { SelectList } from 'react-native-dropdown-select-list'
 
-
+/**
+ * A dropdown component that allows users to select a font from a list.
+ * The selected font is then updated in the FontContext to be used across the application.
+ */
 const FontDropDown = () => {
     const { fontFamily, setFontFamily } = useFont();
     const fontData = [
@@ -36,5 +39,5 @@ const FontDropDown = () => {
     );
   };
 
-  export default FontDropDown;
-const styles = StyleSheet.create({})
+export default FontDropDown;
+const styles = StyleSheet.create({});

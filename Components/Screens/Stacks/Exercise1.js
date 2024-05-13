@@ -1,3 +1,10 @@
+
+/**
+ * Exercise1 component represents a screen for a reading exercise.
+ * It displays the exercise content, timer, font dropdown, and camera screen.
+ * Users can read the extract aloud, answer comprehension questions, and finish the exercise.
+ * @returns {JSX.Element} Exercise1 component
+ */
 import { StyleSheet, Text, ScrollView, View, Button, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { useRoute } from '@react-navigation/native';
@@ -19,8 +26,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import colours from '../../../colours';
 
-
-
+/** This object is created to avoid having this text inline much cleaner to look at and change */
 
 const TextContent = {
   intro: " The Goal is to Read the Extract Aloud, then Answer the Comprehension Questions. We're here to support you every step of the way.",
@@ -44,27 +50,63 @@ const Exercise1 = () => {
   const [timerVisible, setTimerVisible] = useState(true);
 
   
-
+  // Retrieves routing information, specifically parameters passed to the component.
   const route = useRoute();
+  // Extracts the 'Extract' object from route parameters, containing the exercise data.
   const item = route.params?.Extract;
+
+  /**
+ * Splits the content of the 'Extract' into paragraphs for display purposes,
+ * breaking the content at double line breaks.
+ */
 
 
   const paragraphs = item?.content.split('\n\n');
 
+
+  /**
+ * Counts the total number of words in the 'Extract' content by splitting the string
+ * at spaces and measuring the length of the resulting array.
+ */
+
   const wordCount = item?.content.split(' ').length;
+
+  /**
+ * Retrieves the total number of comprehension questions associated with the 'Extract',
+ * which are used to construct the quiz portion of the exercise.
+ */
 
   const totalQuestions = item?.comprehensionQuestions.length;
 
+  /**
+ * Determines whether the quiz is completed by comparing the current question index
+ * with the total number of questions minus one (since indexing starts at zero).
+ */
+
   const isQuizCompleted = index === totalQuestions - 1;
+
+
+  /**
+ * Resets the timer by stopping it and setting the time back to zero.
+ */
 
   const resetTimer = () => {
     setIsActive(false);
     setTime(0);
   }
 
+  /**
+ * Navigates to the 'ResultScreen' using the navigation hook from react-navigation.
+ */
+
   navResultScreen = () => {
     navigation.navigate('ResultScreen');
   }
+
+  /**
+ * Completes the current exercise, hides content, calculates words per minute,
+ * resets the timer, and updates the WPM state.
+ */
 
   const finishFunction = () => {
     setShowContent(false);
@@ -73,6 +115,11 @@ const Exercise1 = () => {
     setWpm(wordsPerMinute);
     resetTimer();
 };
+
+/**
+ * Handles the event when a user selects the correct answer by incrementing the counter,
+ * moving to the next question, and checking if the quiz is completed.
+ */
 
 const onCorrectAnswer = () => {
   setCounter(prevCounter => prevCounter + 1);
@@ -85,9 +132,18 @@ const onCorrectAnswer = () => {
   });
 };
 
+/**
+ * Handles any guess (correct or incorrect) by the user and checks if the quiz is completed.
+ */
+
   const onHandleGuess = () => {
     checkQuizCompletion();
   };
+
+
+  /**
+ * Checks if the quiz is completed and logs a message or moves to the next question.
+ */
 
   
   const checkQuizCompletion = () => {
@@ -98,9 +154,22 @@ const onCorrectAnswer = () => {
     }
   };
 
+  /**
+ * Shows the dialog by setting its visibility state to true.
+ */
+
   const showDialog = () => setDialogVisible(true);
+
+  /**
+ * Calls showDialog on component mount to initially show the dialog.
+ */
   const hideDialog = () => setDialogVisible(false);
 
+
+
+  /**
+ * Watches for the completion of the quiz and triggers modal display, stops recording, and handles the rendering of results.
+ */
   useEffect(() => {
      
     showDialog()
@@ -120,7 +189,10 @@ const onCorrectAnswer = () => {
   
 
 
-  
+  /**
+ * Gathers and updates the exercise data such as score, words per minute, and total questions,
+ * and sends it to the appropriate handler (likely a state management or API call).
+ */
   const renderRusults = () => {
     updateExerciseData('Exercise1', {
       score: counter,
@@ -130,7 +202,10 @@ const onCorrectAnswer = () => {
   };
 
 
-
+  /**
+ * Reads aloud a concatenation of all text pieces defined in the TextContent object,
+ * using specified language, pitch, and rate settings.
+ */
   const readTextAloud = () => {
     const allText = Object.values(TextContent).join(" ");
     Speech.speak(allText, {
@@ -140,6 +215,11 @@ const onCorrectAnswer = () => {
     });
   };
 
+
+/**
+ * Defines the style for the camera screen container, setting its position,
+ * dimensions, and pointer event handling based on whether the camera is minimized.
+ */
   const cameraScreenContainerStyle = {
       position: 'absolute', // Position the camera screen absolutely
       top: 0,

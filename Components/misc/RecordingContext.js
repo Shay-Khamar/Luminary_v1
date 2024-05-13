@@ -1,13 +1,29 @@
+
+/**
+ * @file Provides the RecordingContext and RecordingProvider components for managing recording functionality.
+ */
+
 import React, { createContext, useContext, useState, useRef } from 'react';
 import { uploadVideoAsync } from '../../firebaseConfig';
 import { useNavigation } from '@react-navigation/native';
 
+/**
+ * Context object for accessing recording functionality.
+ * @type {React.Context}
+ */
 const RecordingContext = createContext();
 
+/**
+ * Hook for accessing the recording context.
+ * @returns {Object} The recording context object.
+ */
 export const useRecording = () => useContext(RecordingContext);
 
-
-
+/**
+ * Provider component for managing recording functionality.
+ * @param {Object} props - The component props.
+ * @returns {JSX.Element} The RecordingProvider component.
+ */
 export const RecordingProvider = ({ children }) => {
     const [visible, setVisible] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
@@ -17,20 +33,32 @@ export const RecordingProvider = ({ children }) => {
     const [uploadDecisionCallback, setUploadDecisionCallback] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
 
-
+    /**
+     * Toggles the camera minimized state.
+     * @param {boolean} cameraMinimized - The new camera minimized state.
+     */
     const toggleCameraMinimized = (cameraMinimized) => {
       setCameraMinimized(cameraMinimized);
     };
 
+    /**
+     * Registers a callback function for upload decision.
+     * @param {Function} callback - The callback function.
+     */
     const registerUploadDecisionCallback = (callback) => {
       setUploadDecisionCallback(() => callback);
-  };
+    };
 
-  navResultScreen = () => {
-    navigation.navigate('ResultScreen');
-  }
+    /**
+     * Navigates to the result screen.
+     */
+    const navResultScreen = () => {
+      navigation.navigate('ResultScreen');
+    };
 
-
+    /**
+     * Starts the video recording.
+     */
     const startRecording = async () => {
         if (cameraRef.current) {
           setIsRecording(true);
@@ -42,10 +70,11 @@ export const RecordingProvider = ({ children }) => {
             console.log(visible);
           }
         }
-      };
+    };
 
- 
-
+    /**
+     * Stops the video recording.
+     */
     const stopRecording = async () => {
         if (cameraRef.current) {
           setIsRecording(false);
@@ -53,7 +82,10 @@ export const RecordingProvider = ({ children }) => {
         }
     };
 
-    
+    /**
+     * Handles the upload button press.
+     * @param {boolean} shouldUpload - Indicates whether the video should be uploaded.
+     */
     const handleUploadPress = async (shouldUpload) => {
       hideModal(); // Always hide the modal after the decision
       if (shouldUpload && videoUri) {
@@ -70,32 +102,33 @@ export const RecordingProvider = ({ children }) => {
       }, 500); // Delay to allow for state updates or UI effects
     };
 
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
+    /**
+     * Shows the modal.
+     */
+    const showModal = () => setVisible(true);
 
+    /**
+     * Hides the modal.
+     */
+    const hideModal = () => setVisible(false);
 
-
-
-  return (
-    <RecordingContext.Provider value={{ 
-        startRecording, 
-        stopRecording, 
-        handleUploadPress, 
-        setVisible, 
-        visible, 
-        cameraRef, 
-        isRecording,
-        toggleCameraMinimized,
-        cameraMinimized,
-        setCameraMinimized,
-        registerUploadDecisionCallback,
-        showModal,
-        hideModal,
-
-    }}>
-        {children}
-    </RecordingContext.Provider>
-  );
-
-
+    return (
+      <RecordingContext.Provider value={{ 
+          startRecording, 
+          stopRecording, 
+          handleUploadPress, 
+          setVisible, 
+          visible, 
+          cameraRef, 
+          isRecording,
+          toggleCameraMinimized,
+          cameraMinimized,
+          setCameraMinimized,
+          registerUploadDecisionCallback,
+          showModal,
+          hideModal,
+      }}>
+          {children}
+      </RecordingContext.Provider>
+    );
 };

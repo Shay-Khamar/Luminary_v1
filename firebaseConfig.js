@@ -14,9 +14,10 @@ import {
   FIREBASE_MEASUREMENT_ID
 } from '@env'; 
 
-
-
-
+/**
+ * Firebase configuration object.
+ * @type {Object}
+ */
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
   authDomain: FIREBASE_AUTH_DOMAIN,
@@ -29,11 +30,17 @@ const firebaseConfig = {
 
 // Initialize Firebase
 if(getApps().length === 0){
-const app = initializeApp(firebaseConfig)
+  /**
+   * Initialize Firebase if no apps are initialized yet.
+   */
+  const app = initializeApp(firebaseConfig)
 }
 
-
-
+/**
+ * Uploads a video asynchronously to Firebase Storage.
+ * @param {string} uri - The URI of the video to upload.
+ * @returns {Promise<string>} A Promise that resolves to the download URL of the uploaded video.
+ */
 export async function uploadVideoAsync(uri) {
   console.log("Starting uploadVideoAsync with URI:", uri);
   const blob = await new Promise((resolve, reject) => {

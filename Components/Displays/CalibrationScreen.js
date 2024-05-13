@@ -7,11 +7,19 @@ import colours from '../../colours';
 const { width, height } = Dimensions.get('window');
 const directions = ['lets begin', 'top-left', 'top-right', 'bottom-left', 'bottom-right', 'center'];
 
+/**
+ * A screen component for calibrating a device's screen interaction through guided audio and visual cues.
+ * 
+ * @param {Object} props - The props passed to the component.
+ * @param {boolean} props.calibrationActive - Indicates if calibration is currently active.
+ * @param {Function} props.onCalibrationComplete - Callback function to execute when calibration is completed.
+ */
 const CalibrationScreen = ({ calibrationActive, onCalibrationComplete }) => {
     const position = useSharedValue({ x: 0, y: 0 });
     const [index, setIndex] = useState(0);
     const [calibrationCompleted, setCalibrationCompleted] = useState(false);
 
+    // Handles the end of the calibration process
     useEffect(() => {
         if (calibrationCompleted) {
             onCalibrationComplete();
@@ -19,14 +27,14 @@ const CalibrationScreen = ({ calibrationActive, onCalibrationComplete }) => {
         }
     }, [calibrationCompleted, onCalibrationComplete]);
 
-
-
+    // Announce current direction using Speech API
     useEffect(() => {
         if (calibrationActive) {
             Speech.speak(directions[index]);
         }
     }, [index, calibrationActive]);
 
+    // Controls the sequence of calibration steps
     useEffect(() => {
         if (calibrationActive) {
             setIndex(0);  // Reset to start
@@ -50,8 +58,9 @@ const CalibrationScreen = ({ calibrationActive, onCalibrationComplete }) => {
                 clearInterval(interval);
             }
         }
-    }, [calibrationActive,  setCalibrationCompleted]);
+    }, [calibrationActive]);
 
+    // Function to move the square to a new position based on the direction
     const moveSquare = (direction) => {
         let newX = 0;
         let newY = 0;
@@ -80,6 +89,7 @@ const CalibrationScreen = ({ calibrationActive, onCalibrationComplete }) => {
         position.value = withSpring({ x: newX, y: newY }, { damping: 15 });
     };
 
+    // Animated styles for the moving square
     const animatedStyles = useAnimatedStyle(() => {
         return {
             transform: [

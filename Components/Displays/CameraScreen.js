@@ -1,3 +1,10 @@
+
+/**
+ * @file CameraScreen.js
+ * @description A screen component that displays the camera view and handles video recording and calibration.
+ * @module Components/Displays/CameraScreen
+ */
+
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
@@ -21,7 +28,12 @@ import colours from '../../colours';
 
 const { width, height } = Dimensions.get('window');
 
+/**
+ * A screen component that displays the camera view and handles video recording and calibration.
+ * @returns {JSX.Element} The CameraScreen component.
+ */
 const CameraScreen = () => {
+  // State variables
   const [CameraPermission, setCameraPermission] = useState(null);
   const [MicrophonePermission, setMicrophonePermission] = useState(null);
   const [mediaPermission, setMediaPermission] = useState(null);
@@ -31,64 +43,76 @@ const CameraScreen = () => {
   const { time, setTime,  setIsActive } = useTimer();
   const navigation = useNavigation();
   const [allowInteraction, setAllowInteraction] = useState(true); 
- 
   const [active, setActive] = useState(false);
 
- 
-
+  // Custom hooks
   const { setVisible, visible,  startRecording, stopRecording, cameraRef, isRecording , handleUploadPress, toggleCameraMinimized, hideModal,  } = useRecording();
 
+  // Animated values and styles
+  const scale = useSharedValue(1); // Start with the original size
+  const translateY = useSharedValue(0); // Start at original vertical position
+  const translateX = useSharedValue(0); // Start at original horizontal position
 
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { scale: scale.value },
+        { translateY: translateY.value },
+        { translateX: translateX.value }
+      ],
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      pointerEvents: allowInteraction ? 'auto' : 'none',
+    };
+  });
+
+  /**
+   * Shrinks the camera view and moves it to the corner of the screen.
+   */
+  const shrinkAndMoveToCorner = () => {
+    scale.value = withSpring(0.15);
+    nowMoveIt(); 
+    runOnJS(setAllowInteraction)(true);
+  };
+
+  /**
+   * Moves the camera view to the corner of the screen.
+   */
+  const nowMoveIt = () => {
+    translateY.value = withSpring(height * 1.5);
+    translateX.value = withSpring(-width * 4.6)
+  };
+
+  /**
+   * Navigates to the ResultScreen.
+   */
+  const navResultScreen = () => {
+    navigation.navigate('ResultScreen');
+  };
+
+  /**
+   * Hides the modal and navigates to the ResultScreen.
+   */
+  const hideModalAndNavigate = () => {
+    hideModal(); // This should just set 'visible' to false
+    navResultScreen(); // Ensure this function navigates to the result screen
+  };
+
+  /**
+   * Handles the completion of the calibration process.
+   */
   const handleCalibrationComplete = async () => {
     setActive(false);  // Turn off calibration
 
     // Trigger recording after calibration
     shrinkAndMoveToCorner();
-      setIsActive(true);
+    setIsActive(true);
   };
 
-  
-
-  
-
-
-  const scale = useSharedValue(1); // Start with the original size
-const translateY = useSharedValue(0); // Start at original vertical position
-const translateX = useSharedValue(0); // Start at original horizontal position
-
-const animatedStyle = useAnimatedStyle(() => {
-  return {
-    transform: [
-      { scale: scale.value },
-      { translateY: translateY.value },
-      { translateX: translateX.value }
-    ],
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    pointerEvents: allowInteraction ? 'auto' : 'none',
-  };
-});
-
-const shrinkAndMoveToCorner = () => {
-  scale.value = withSpring(0.15);
-  nowMoveIt(); 
-  runOnJS(setAllowInteraction)(true);
-};
-
-const nowMoveIt = () => {
-  translateY.value = withSpring(height * 1.5);
-  translateX.value = withSpring(-width * 4.6)
-};
-  navResultScreen = () => {
-    navigation.navigate('ResultScreen');
-  }
-
-  const hideModalAndNavigate = () => {
-    hideModal(); // This should just set 'visible' to false
-    navResultScreen(); // Ensure this function navigates to the result screen
-};
-
+  /**
+   * Toggles the calibration process.
+   */
   const calibrationToggle = async () => {
     setActive(true); // This will show the CalibrationScreen when button is pressed
 
@@ -98,13 +122,9 @@ const nowMoveIt = () => {
     }
   };
 
-
-
-
-
-  
-
-
+  /**
+   * Requests camera, microphone, and media permissions on component mount.
+   */
   useEffect(() => {
     const requestPermissions = async () => {
       if (!CameraPermission) {
@@ -126,15 +146,9 @@ const nowMoveIt = () => {
     requestPermissions();
   }, []);
 
-
-  
-
-
-
-
   return (
     <PaperProvider>
-     <Animated.View style={[styles.cameraContainer, animatedStyle]}>
+      <Animated.View style={[styles.cameraContainer, animatedStyle]}>
         <Camera style={styles.camera} type={type} ref={cameraRef}>
           <TouchableOpacity
             style={[styles.backButton,{ display: isRecording ? "none" : undefined }]}
@@ -143,31 +157,26 @@ const nowMoveIt = () => {
             <Ionicons name="arrow-back" size={40} color="white" />
           </TouchableOpacity>
           <View style={[styles.buttonContainer, { display: isRecording ? "none" : undefined }]}>
-          <ThemedButton name="bruce" onPressIn={calibrationToggle} width={250} height={115}  type="secondary" textSize={40} borderRadius={25} backgroundColor={colours.accent} textColor={colours.text}>Begin Calibration</ThemedButton>
-
+            <ThemedButton name="bruce" onPressIn={calibrationToggle} width={250} height={115}  type="secondary" textSize={40} borderRadius={25} backgroundColor={colours.accent} textColor={colours.text}>Begin Calibration</ThemedButton>
           </View>
         </Camera>
           
-          <Portal>
-
+        <Portal>
           <ModalComponent
             visible={visible}
             hideModal={hideModalAndNavigate}  
-              onUploadPress={() => handleUploadPress(checked)} // Pass 'checked' state or similar if you need to know the upload decision
-              isChecked={checked}
-                toggleCheckbox={() => setChecked(!checked)}
-          text="Would you like to upload this video?"
+            onUploadPress={() => handleUploadPress(checked)} // Pass 'checked' state or similar if you need to know the upload decision
+            isChecked={checked}
+            toggleCheckbox={() => setChecked(!checked)}
+            text="Would you like to upload this video?"
           />
+        </Portal>
 
-           
-           </Portal>
-
-
-           {active && (
-        <CalibrationScreen calibrationActive={active} onCalibrationComplete={handleCalibrationComplete} />
-      )}
-    </Animated.View>
-   </PaperProvider>
+        {active && (
+          <CalibrationScreen calibrationActive={active} onCalibrationComplete={handleCalibrationComplete} />
+        )}
+      </Animated.View>
+    </PaperProvider>
   );
 };
 
@@ -178,27 +187,24 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
-    
   },
   camera: {
     flex  : 1,
     backgroundColor: 'rgba(255, 0, 0, 0.6)',
   },
   buttonContainer: {
-     position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 40, // Adjust as needed
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 10
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 40, // Adjust as needed
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 10
   },
-
   backButton: {
     position: 'absolute',
     top: 40,
     left: 20,
     zIndex: 11,  // ensure it's on top
   },
-
 });

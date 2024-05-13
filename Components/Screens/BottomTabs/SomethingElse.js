@@ -1,10 +1,22 @@
+
 import { StyleSheet, Text, View, TouchableOpacity, Linking } from 'react-native';
 import React from 'react';
 import colours from '../../../colours';
 
+/**
+ * Represents the SomethingElse component.
+ * @component
+ */
 const SomethingElse = () => {
+  /**
+   * The contact email address.
+   * @type {string}
+   */
   const contactEmail = "s5414643@bournemouth.ac.uk"; 
 
+  /**
+   * Handles the press event of the email button.
+   */
   const handleEmailPress = () => {
     const url = `mailto:${contactEmail}?subject=Concerning My Data&body=Hi, I would like to discuss...`;
     Linking.openURL(url);

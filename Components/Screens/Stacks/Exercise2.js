@@ -13,6 +13,12 @@ import colours from '../../../colours';
 import Exercise2DisplayBox from '../../Displays/Exercise2DisplayBox';
 import { average } from 'firebase/firestore';
 
+/**
+ * Represents the Exercise2 component.
+ * This component handles a speed task where users match words with symbols as quickly as possible.
+ * @returns {JSX.Element} JSX for the Exercise2 component.
+ */
+
 const Exercise2 = () => {
     const [randomItemsArray, setRandomItemsArray] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,6 +35,10 @@ const Exercise2 = () => {
     const [showModal, setShowModal] = useState(true);
 
     const navigation = useNavigation();
+
+    /**
+    * Navigates to the ResultScreen.
+    */
 
     navResultScreen = () => {
         navigation.navigate('ResultScreen');
@@ -64,6 +74,11 @@ const Exercise2 = () => {
     };
 
     const keys = Object.keys(data);
+
+    /**
+    * Returns a randomly selected item from the data object.
+     * @returns {Object} A randomly selected item.
+    */
     const getRandomItem = () => data[keys[Math.floor(Math.random() * keys.length)]];
 
     useEffect(() => {
@@ -87,6 +102,10 @@ const Exercise2 = () => {
 
     const currentItem = randomItemsArray[currentIndex] || {};
 
+        /**
+        * Shuffles the button values to present to the user.
+        */
+
     const shuffleButtons = () => {
       const currentName = randomItemsArray[currentIndex].name;
       const uniqueKeys = new Set(keys); 
@@ -101,6 +120,11 @@ const Exercise2 = () => {
 
       setButtonValues(shuffled);
   };
+
+    /**
+    * Plays a sound based on whether the user's choice was correct or incorrect.
+    * @param {boolean} correct - Indicates whether the user's choice was correct.
+    */
 
   const playSound = async (correct) => {
     const sound = correct
@@ -120,6 +144,12 @@ const Exercise2 = () => {
         console.error("Error playing sound:", error);
     }
 };
+
+   /**
+ * Handles user button press events.
+ * Updates state based on user input and plays corresponding sounds.
+ * @param {string} value - The value of the button pressed by the user.
+ */
 
 const handlePress = async (value) => {
     const reactionTime = Date.now() - startTime;
@@ -149,7 +179,12 @@ const handlePress = async (value) => {
 
 
 
-
+        /**
+        * Renders the results of the exercise and navigates to the ResultScreen.
+        * @param {number} rate - The completion rate of the exercise.
+        * @param {number} averageTime - The average reaction time of the user.
+        * @param {number} errors - The number of errors made by the user.
+        */
 
 
 const renderResults = (rate, averageTime, errors) => {
