@@ -4,20 +4,26 @@ import { Button } from 'react-native-paper'
 import { FontProvider } from '../misc/FontContext'
 import CustomText from '../misc/CustomText'
 
-
+/**
+ * A button component that utilizes a custom text component within a font provider context.
+ * 
+ * @param {Object} props - The properties passed to the component.
+ * @param {Function} props.onPress - The function to execute when the button is pressed.
+ * @param {React.ReactNode} props.children - The content to display inside the button, typically text.
+ */
 const OptionsButton = ({onPress, children}) => {
   return (
     <FontProvider>
-    <TouchableOpacity style={styles.Button} onPress={onPress}>
-        <CustomText style={styles.text}>{children}</CustomText>
-    </TouchableOpacity>
+      <TouchableOpacity style={styles.Button} onPress={onPress}>
+          <CustomText style={styles.text}>{children}</CustomText>
+      </TouchableOpacity>
     </FontProvider>
   )
 }
 
 export default OptionsButton
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
     Button: {
         backgroundColor: '#fff',
         height: '25%',
@@ -39,7 +45,4 @@ styles = StyleSheet.create({
         fontSize: 24,
         textAlign: 'center',
     }
-
-
-
 })

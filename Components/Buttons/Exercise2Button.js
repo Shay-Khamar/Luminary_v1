@@ -1,7 +1,15 @@
-// SquareButton.js
+
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import colours from '../../colours';
 
+/**
+ * Renders a square button with customizable text and an onPress event.
+ * 
+ * @param {Object} props - The props for the component.
+ * @param {string} props.value - The text to display inside the button.
+ * @param {Function} props.onPress - The function to call when the button is pressed.
+ */
 const Exercise2Button = ({ value, onPress }) => {
     return (
         <TouchableOpacity style={styles.square} onPress={() => onPress(value)}>

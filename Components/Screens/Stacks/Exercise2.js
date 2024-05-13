@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button, Modal } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { FontAwesome, FontAwesome5, MaterialCommunityIcons, AntDesign  } from '@expo/vector-icons';
 import Exercise2Button from '../../Buttons/Exercise2Button';
 import { useNavigation } from '@react-navigation/native';
 import { Audio } from 'expo-av';
 import { useResults } from '../../misc/ResultContext';
+import {useTimer} from '../../misc/TimerContext';
+import colours from '../../../colours';
 
 
 
@@ -23,6 +25,8 @@ const Exercise2 = () => {
     const [finalRate, setFinalRate] = useState(null);
     const [finalAverageTime, setFinalAverageTime] = useState(null);
     const [finalErrors, setFinalErrors] = useState(null);
+    const [exerciseStarted, setExerciseStarted] = useState(false);
+    const [showModal, setShowModal] = useState(true);
 
     const navigation = useNavigation();
 
@@ -157,48 +161,90 @@ const renderResults = (rate, averageTime, errors) => {
     navigation.navigate('ResultScreen');
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     return (
         <View style={styles.container}>
-            <Text>Exercise2</Text>
-            <Text>Counter: {counter}/{randomItemsArray.length}</Text>
+            <View style={styles.header}>
+            <Text style={styles.title}>SPEED TASK</Text>
+            <Text style={styles.counterStyle}>Counter: {counter}/<Text style={styles.someColour}>{randomItemsArray.length}</Text></Text>
+            </View>
+            <View style={styles.mainElementsContainer}>
+                <Text style={styles.whatIsThis}>What Is This?</Text>
             {currentItem && <Exercise2DisplayBox icon={currentItem.icon} />}
             <View style={styles.buttonsContainer}>
                 {buttonValues.map((value, index) => (
                     <Exercise2Button key={index} value={value} onPress={handlePress} />
                 ))}
             </View>
+            </View>
+
+
+            <Modal
+            animationType="slide"
+            transparent={true}
+            visible={showModal}
+            onRequestClose={() => {
+            setShowModal(!showModal);
+            }}
+            >
+            <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+            <Text style={styles.modalText}>Match the word and symbol as fast as possible !</Text>
+            <Button
+             title="OK"
+            onPress={() => {
+            setShowModal(false);
+            setExerciseStarted(true);
+            }}
+            />
         </View>
+        </View>
+        </Modal>
+    </View>
     );
 }
 
 export default Exercise2;
 
 const styles = StyleSheet.create({
+
     container: {
         flex: 1,
-        alignItems: 'center',
+        backgroundColor: colours.background,
+    },
+
+    whatIsThis: {
+        fontSize: 40,
+        fontFamily: 'OpenSans', 
+        marginBottom: '2%',
+    },
+
+    someColour: {
+        color: colours.accent,
+    },
+
+    mainElementsContainer : {
+        flex: 1,
         justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    header: {
+        flexDirection: 'row',
+        height: '10%',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: '1%'
+    
+    },
+
+    counterStyle : {
+        fontSize: 30,
+        fontWeight: 'bold',
+    },
+
+    title: {
+        fontSize: 30,
+        fontWeight: 'bold',
     },
 
     buttonsContainer: {
@@ -210,6 +256,34 @@ const styles = StyleSheet.create({
   columnWrapper: {
     justifyContent: 'center',
 },
+
+
+centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: colours.background,
+    borderRadius: 20,
+    padding: '10%',
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    fontSize: 20
+  }
 
 
 });

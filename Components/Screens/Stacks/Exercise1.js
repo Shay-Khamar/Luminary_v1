@@ -17,15 +17,16 @@ import { useResults } from '../../misc/ResultContext';
 
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import colours from '../../../colours';
 
 
 
 
 const TextContent = {
-  intro: " Notice a small recording indicator at the bottom left of your screen? It's there because we're gathering insights to make experiences like yours even better. Not comfortable with sharing? No worries, feel free to opt out anytime.",
-  story: " We encourage you to read through the extract fully. There's a world within these words, and at the end, we have some questions to help us explore your thoughts and insights together.",
-  customization: " Your comfort is our priority. Feel free to adjust the font to your liking from the dropdown menu in the top right. Finding what works best for you can make all the difference.",
-  gratitude: " We can't thank you enough for joining us and participating. Your involvement is a huge support to our research and helps us create more inclusive and empowering reading environments."
+  intro: " The Goal is to Read the Extract Aloud, then Answer the Comprehension Questions. We're here to support you every step of the way.",
+  story: " You are able to change the font to your liking. This can help you read more comfortably and effectively. We want to make sure you have the best experience possible.",
+  customization: "The Timer at the Top of the screen can be hidden or shown by tapping it ",
+  gratitude: "You can choose to opt out of uploading the recording of your reading at the end of the exercise. We respect your privacy and your choices."
 };
 
 const Exercise1 = () => {
@@ -59,7 +60,6 @@ const Exercise1 = () => {
   const resetTimer = () => {
     setIsActive(false);
     setTime(0);
-
   }
 
   navResultScreen = () => {
@@ -156,21 +156,21 @@ const onCorrectAnswer = () => {
   return (
     <>
     <DialogBoxComponent visible={dialogVisible} onDismiss={hideDialog} Title={'Just Before Start'}>
-      <TouchableOpacity onPress={readTextAloud}><FontAwesome name="volume-up" size={24} color="black" /></TouchableOpacity>
+      <TouchableOpacity onPress={readTextAloud}><FontAwesome name="volume-up" size={24} color={colours.accent} /></TouchableOpacity>
       <Text style={styles.DialogText}>
-      <Text style={styles.subheading}>Your Journey, Your Control:</Text>{TextContent.intro}
+      <Text style={styles.subheading}>Reading Task:</Text>{TextContent.intro}
       </Text>
 
       <Text style={styles.DialogText}>
-      <Text style={styles.subheading}>Dive Deep into the Story: </Text>{TextContent.story}
+      <Text style={styles.subheading}>Accessibility Features:</Text>{TextContent.story}
       </Text>
 
       <Text style={styles.DialogText}>
-      <Text style={styles.subheading}>Customize Your Reading Experience:</Text>{TextContent.customization}
+      <Text style={styles.subheading}>Timer:</Text>{TextContent.customization}
       </Text>
 
       <Text style={styles.DialogText}>
-      <Text style={styles.subheading}>Gratitude:</Text>{TextContent.gratitude}
+      <Text style={styles.subheading}>The Recording</Text>{TextContent.gratitude}
       </Text>
       </DialogBoxComponent>
 
@@ -192,8 +192,10 @@ const onCorrectAnswer = () => {
 
       </TouchableOpacity>
       </View>
-      
+
+      <View style={styles.dropdownContainer}>      
       <FontDropDown />
+      </View>
       </View>
       <View style={styles.centeredBoxContainer}>
         { showContent && (
@@ -213,7 +215,7 @@ const onCorrectAnswer = () => {
     )}
     <View style={{flex: 1}}></View>
     {showContent && (
-    <ThemedButton name="bruce" onPressIn={finishFunction} width={250} height={115}  type="secondary" textSize={40} borderRadius={25}>Finish</ThemedButton>
+    <ThemedButton name="bruce" onPressIn={finishFunction} width={250} height={115}  type="secondary" textSize={40} borderRadius={25} backgroundColor={colours.accent}>Finish</ThemedButton>
     )}
     </View>
     </View>
@@ -236,7 +238,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
-    backgroundColor: '#cfcfdb'
+    backgroundColor: colours.background,
   },
 
   timerWrapper: {
@@ -253,9 +255,10 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 20,
-    position: 'relative',
     justifyContent: 'space-between',
+    position: 'relative', 
+    width: '100%', 
+    padding: 20,
     marginTop: 10,
   },
 
@@ -297,6 +300,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 10,
+    paddingTop: 20,
 
   },
 
@@ -326,8 +330,17 @@ const styles = StyleSheet.create({
   },
   timerValue: {
     fontSize: 25,
-    color: 'grey',
+    color: colours.accent,
     fontWeight: 'bold'
+  },
+
+  dropdownContainer: {
+    position: 'absolute', // Makes the dropdown float over other components
+    width: '10%',         // Adjust width as necessary
+    zIndex: 1000,          // Ensures it stays on top
+    top: '50%',
+    right: '1%',
+    alignItems: 'flex-end',
   },
 
 

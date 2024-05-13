@@ -42,7 +42,7 @@ container: {
   backgroundColor: colours.background,
 },
 headerContainer: {
-  alignSelf: 'flex-start', // Aligns the header to the top left
+  alignSelf: 'center', // Aligns the header to the top left
   marginTop: 20, // Optionally adjust top margin
   marginLeft: 20, // Optionally adjust left margin
 },

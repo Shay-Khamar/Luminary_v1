@@ -54,20 +54,21 @@ export const RecordingProvider = ({ children }) => {
     };
 
     
-  const handleUploadPress = async () => {
-    hideModal();
-    if (videoUri) {
-      try {
-        navResultScreen();
-        
-        const uploadUrl = await uploadVideoAsync(videoUri);
-        console.log('Uploaded video URL:', uploadUrl);
-        
-      } catch (error) {
-        console.error('Error uploading video:', error);
+    const handleUploadPress = async (shouldUpload) => {
+      hideModal(); // Always hide the modal after the decision
+      if (shouldUpload && videoUri) {
+        try {
+          const uploadUrl = await uploadVideoAsync(videoUri);
+          console.log('Uploaded video URL:', uploadUrl);
+        } catch (error) {
+          console.error('Error uploading video:', error);
+        }
       }
-    } 
-  };
+      // Navigation should be a distinct step, possibly called after a brief delay or as a callback
+      setTimeout(() => {
+        navResultScreen();
+      }, 500); // Delay to allow for state updates or UI effects
+    };
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);

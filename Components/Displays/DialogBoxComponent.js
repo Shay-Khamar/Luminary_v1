@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { Dialog, Portal } from 'react-native-paper';
+import colours from '../../colours';
 
 const DialogBoxComponent = ({ visible, onDismiss, children, Title }) => {
   return (
@@ -22,15 +23,19 @@ const DialogBoxComponent = ({ visible, onDismiss, children, Title }) => {
 const styles = StyleSheet.create({
   DialogBox: {
     width: '40%', 
-    maxHeight: '80%', 
+    maxHeight: '80%',
+    backgroundColor: colours.background, 
   },
   Title: {
     fontSize: 20, // Adjust as needed
     fontWeight: 'bold',
+    fontFamily: 'Helvetica',
+    color: colours.primary,
   },
   content: {
     paddingHorizontal: 24,
     paddingBottom: 24, // Ensures padding at the bottom
+    fontFamily: 'Helvetica',
   },
 });
 

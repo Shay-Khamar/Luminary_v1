@@ -17,6 +17,7 @@ import { ThemedButton } from 'react-native-really-awesome-button';
 
 import { uploadVideoAsync } from '../../firebaseConfig';
 import { set } from 'firebase/database';
+import colours from '../../colours';
 
 const { width, height } = Dimensions.get('window');
 
@@ -35,7 +36,7 @@ const CameraScreen = () => {
 
  
 
-  const { setVisible, visible,  startRecording, stopRecording, cameraRef, isRecording , handleUploadPress, toggleCameraMinimized  } = useRecording();
+  const { setVisible, visible,  startRecording, stopRecording, cameraRef, isRecording , handleUploadPress, toggleCameraMinimized, hideModal,  } = useRecording();
 
 
   const handleCalibrationComplete = async () => {
@@ -45,6 +46,8 @@ const CameraScreen = () => {
     shrinkAndMoveToCorner();
       setIsActive(true);
   };
+
+  
 
   
 
@@ -80,6 +83,11 @@ const nowMoveIt = () => {
   navResultScreen = () => {
     navigation.navigate('ResultScreen');
   }
+
+  const hideModalAndNavigate = () => {
+    hideModal(); // This should just set 'visible' to false
+    navResultScreen(); // Ensure this function navigates to the result screen
+};
 
   const calibrationToggle = async () => {
     setActive(true); // This will show the CalibrationScreen when button is pressed
@@ -121,12 +129,8 @@ const nowMoveIt = () => {
 
   
 
-  const navigateToResultScreen = async () => {
-    handleUploadPress();
-    await navResultScreen();
-  }
 
-  const hideModal = () => setVisible(false);
+
 
   return (
     <PaperProvider>
@@ -139,24 +143,23 @@ const nowMoveIt = () => {
             <Ionicons name="arrow-back" size={40} color="white" />
           </TouchableOpacity>
           <View style={[styles.buttonContainer, { display: isRecording ? "none" : undefined }]}>
-          <ThemedButton name="bruce" onPressIn={calibrationToggle} width={250} height={115}  type="secondary" textSize={40} borderRadius={25}>Begin Calibration</ThemedButton>
+          <ThemedButton name="bruce" onPressIn={calibrationToggle} width={250} height={115}  type="secondary" textSize={40} borderRadius={25} backgroundColor={colours.accent} textColor={colours.text}>Begin Calibration</ThemedButton>
 
           </View>
         </Camera>
           
           <Portal>
 
-           <ModalComponent
-           visible={visible}
-           /**
-            * This solution to the navResultScreen function is not ideal, but it works for now.
-            */
-           hideModal={hideModal && navResultScreen}
-           onUploadPress={navigateToResultScreen}
-           isChecked={checked}
-           toggleCheckbox={() => setChecked(!checked)}
-             text="Would you like to upload this video?"
-           />
+          <ModalComponent
+            visible={visible}
+            hideModal={hideModalAndNavigate}  
+              onUploadPress={() => handleUploadPress(checked)} // Pass 'checked' state or similar if you need to know the upload decision
+              isChecked={checked}
+                toggleCheckbox={() => setChecked(!checked)}
+          text="Would you like to upload this video?"
+          />
+
+           
            </Portal>
 
 

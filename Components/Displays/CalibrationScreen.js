@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import * as Speech from 'expo-speech';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+import colours from '../../colours';
 
 const { width, height } = Dimensions.get('window');
 const directions = ['lets begin', 'top-left', 'top-right', 'bottom-left', 'bottom-right', 'center'];
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
     square: {
         width: 50,
         height: 50,
-        backgroundColor: 'blue',
+        backgroundColor: colours.accent,
     },
 });
 

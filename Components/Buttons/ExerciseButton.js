@@ -2,16 +2,22 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import colours from '../../colours'
 
+/**
+ * A button component that displays a title and can encapsulate additional children within a header section.
+ * 
+ * @param {Object} props - The properties passed to the component.
+ * @param {Function} props.onPress - The function to execute when the button is pressed.
+ * @param {string} props.Title - The title text to display on the button.
+ * @param {React.ReactNode} props.children - Additional child components to be displayed below the title.
+ */
 const ExerciseButton = ({onPress, Title, children}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.header}>
-      <Text style={styles.text}>{Title}</Text>
-      <View style={styles.header}>{children}</View>
+        <Text style={styles.text}>{Title}</Text>
+        <View style={styles.header}>{children}</View>
       </View>
     </TouchableOpacity>
-
-      
   )
 }
 
@@ -33,15 +39,14 @@ const styles = StyleSheet.create({
     shadowRadius: 4,  // Soften the shadow edges
     elevation: 8,  // Elevation for Android to create shadow effect
   },
-text: {
+  text: {
     fontSize: 30,
     textTransform: 'uppercase',
     color: colours.text,
     fontFamily: 'Lexend',
     textAlign: 'center',  // Center-align text
-},
-header: {
+  },
+  header: {
     alignSelf: 'center',
-  
-}
+  }
 });
