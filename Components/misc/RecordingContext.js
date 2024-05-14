@@ -24,7 +24,7 @@ export const useRecording = () => useContext(RecordingContext);
  * @param {Object} props - The component props.
  * @returns {JSX.Element} The RecordingProvider component.
  */
-export const RecordingProvider = ({ children }) => {
+export const RecordingProvider = ({ children,}) => {
     const [visible, setVisible] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [videoUri, setVideoUri] = useState(null);
@@ -32,6 +32,10 @@ export const RecordingProvider = ({ children }) => {
     const [cameraMinimized, setCameraMinimized] = useState(false);
     const [uploadDecisionCallback, setUploadDecisionCallback] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
+    const [isUploading, setIsUploading] = useState(false);
+    const [uploadFinished, setUploadFinished] = useState(false);
+
+
 
     /**
      * Toggles the camera minimized state.
@@ -52,9 +56,7 @@ export const RecordingProvider = ({ children }) => {
     /**
      * Navigates to the result screen.
      */
-    const navResultScreen = () => {
-      navigation.navigate('ResultScreen');
-    };
+   
 
     /**
      * Starts the video recording.
@@ -87,21 +89,19 @@ export const RecordingProvider = ({ children }) => {
      * @param {boolean} shouldUpload - Indicates whether the video should be uploaded.
      */
     const handleUploadPress = async (shouldUpload) => {
-      hideModal(); // Always hide the modal after the decision
+      hideModal();
       if (shouldUpload && videoUri) {
-        try {
-          const uploadUrl = await uploadVideoAsync(videoUri);
-          console.log('Uploaded video URL:', uploadUrl);
-        } catch (error) {
-          console.error('Error uploading video:', error);
-        }
+          setIsUploading(true); // Start uploading indicator
+          try {
+              const uploadUrl = await uploadVideoAsync(videoUri);
+              console.log('Uploaded video URL:', uploadUrl);
+          } catch (error) {
+              console.error('Error uploading video:', error);
+          }
+          setIsUploading(false); // Stop uploading indicator regardless of success or failure
+          setUploadFinished(true); // Indicate that upload is finished
       }
-      // Navigation should be a distinct step, possibly called after a brief delay or as a callback
-      setTimeout(() => {
-        navResultScreen();
-      }, 500); // Delay to allow for state updates or UI effects
-    };
-
+  };
     /**
      * Shows the modal.
      */
@@ -127,6 +127,9 @@ export const RecordingProvider = ({ children }) => {
           registerUploadDecisionCallback,
           showModal,
           hideModal,
+          isUploading,
+          uploadFinished, 
+          setUploadFinished
       }}>
           {children}
       </RecordingContext.Provider>

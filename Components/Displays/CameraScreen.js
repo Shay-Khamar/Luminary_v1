@@ -46,7 +46,7 @@ const CameraScreen = () => {
   const [active, setActive] = useState(false);
 
   // Custom hooks
-  const { setVisible, visible,  startRecording, stopRecording, cameraRef, isRecording , handleUploadPress, toggleCameraMinimized, hideModal,  } = useRecording();
+  const { setVisible, visible,  startRecording, stopRecording, cameraRef, isRecording , handleUploadPress, toggleCameraMinimized, hideModal,isUploading, uploadFinished, setUploadFinished} = useRecording();
 
   // Animated values and styles
   const scale = useSharedValue(1); // Start with the original size
@@ -146,6 +146,15 @@ const CameraScreen = () => {
     requestPermissions();
   }, []);
 
+  useEffect(() => {
+    if (uploadFinished) {
+        setTimeout(() => {
+            navResultScreen();
+        }, 500);
+        setUploadFinished(false); // Reset the state
+    }
+}, [uploadFinished]);
+
   return (
     <PaperProvider>
       <Animated.View style={[styles.cameraContainer, animatedStyle]}>
@@ -170,11 +179,21 @@ const CameraScreen = () => {
             toggleCheckbox={() => setChecked(!checked)}
             text="Would you like to upload this video?"
           />
+
+          {isUploading && (
+              <View style={styles.loadingContainer}>
+                <ActivityIndicator size="40%" color={colours.accent} />
+                <View style={styles.box}>
+                  <Text style={styles.text}>Please wait, uploading...</Text>
+                  </View>
+              </View>
+              )}
         </Portal>
 
         {active && (
           <CalibrationScreen calibrationActive={active} onCalibrationComplete={handleCalibrationComplete} />
         )}
+
       </Animated.View>
     </PaperProvider>
   );
@@ -207,4 +226,33 @@ const styles = StyleSheet.create({
     left: 20,
     zIndex: 11,  // ensure it's on top
   },
+
+  loadingContainer: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 100, // Make sure it covers other elements
+  },
+
+  box: {
+    padding: 20,
+    borderRadius: 10,
+    backgroundColor: colours.accent, // Slightly lighter dark background for the box
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  text: {
+    fontSize: 20, // Larger text size for better visibility
+    color: colours.text, // White text color
+  },
+
+  
 });

@@ -13,6 +13,7 @@ import {ResultProvider} from './Components/misc/ResultContext';
 import { useFonts } from 'expo-font';
 import colours from  './colours'
 import { Entypo, AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -99,6 +100,7 @@ function TabNavigator() {
 export default function App() {
   const [orienation, setOrientation] = useState(1);
   const [dimensions, setDimensions] = useState({ width: Dimensions.get('window').width, height: Dimensions.get('window').height });
+  
 
 
   useEffect(() => {
