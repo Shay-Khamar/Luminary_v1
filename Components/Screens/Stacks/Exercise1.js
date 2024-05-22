@@ -22,7 +22,7 @@ import colours from '../../../colours';
 /** This object is created to avoid having this text inline much cleaner to look at and change */
 
 const TextContent = {
-  intro: " The Goal is to Read the Extract Aloud, then Answer the Comprehension Questions. We're here to support you every step of the way.",
+  intro: " The Goal is to Read the Extract Aloud, then Answer the Comprehension Questions.",
   story: " You are able to change the font to your liking. This can help you read more comfortably and effectively. We want to make sure you have the best experience possible.",
   customization: "The Timer at the Top of the screen can be hidden or shown by tapping it ",
   gratitude: "You can choose to opt out of uploading the recording of your reading at the end of the exercise. We respect your privacy and your choices."
@@ -169,8 +169,8 @@ const Exercise1 = () => {
     const allText = Object.values(TextContent).join(" ");
     Speech.speak(allText, {
       language: 'en',
-      pitch: 0.8,
-      rate: 1,
+      pitch: 1.0,
+      rate: 0.65,
     });
   };
 

@@ -1,8 +1,7 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp, getApp, getApps } from "firebase/app";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import "react-native-get-random-values";
+import { initializeApp, getApps } from "firebase/app";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from 'uuid';
+import "react-native-get-random-values";
 
 import { 
   FIREBASE_API_KEY,
@@ -14,10 +13,6 @@ import {
   FIREBASE_MEASUREMENT_ID
 } from '@env'; 
 
-/**
- * Firebase configuration object.
- * @type {Object}
- */
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
   authDomain: FIREBASE_AUTH_DOMAIN,
@@ -29,36 +24,54 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-if(getApps().length === 0){
-  /**
-   * Initialize Firebase if no apps are initialized yet.
-   */
-  const app = initializeApp(firebaseConfig)
+if (getApps().length === 0) {
+  initializeApp(firebaseConfig);
 }
 
-/**
- * Uploads a video asynchronously to Firebase Storage.
- * @param {string} uri - The URI of the video to upload.
- * @returns {Promise<string>} A Promise that resolves to the download URL of the uploaded video.
- */
 export async function uploadVideoAsync(uri) {
   console.log("Starting uploadVideoAsync with URI:", uri);
-  const blob = await new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-      resolve(xhr.response);
-    };
-    xhr.onerror = function(e) {
-      console.log(e);
-      reject(new TypeError('Network request failed'));
-    };
-    xhr.responseType = 'blob';
-    xhr.open('GET', uri, true);
-    xhr.send(null);
-  });
 
-  const fileRef = ref(getStorage(), `videos/${uuidv4()}.mp4`);
-  await uploadBytes(fileRef, blob);
-  blob.close();
-  return getDownloadURL(fileRef);
+  try {
+    // Fetch the video data as a Blob
+    const response = await fetch(uri);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const blob = await response.blob();
+
+    // Create a reference to the file in Firebase Storage
+    const fileRef = ref(getStorage(), `videos/${uuidv4()}.mp4`);
+
+    // Upload the Blob to Firebase Storage in chunks
+    const uploadTask = uploadBytesResumable(fileRef, blob);
+
+    return new Promise((resolve, reject) => {
+      uploadTask.on('state_changed', 
+        (snapshot) => {
+          // Progress callback (optional)
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+        }, 
+        (error) => {
+          // Error callback
+          console.error('Error uploading video:', error);
+          reject(error);
+        }, 
+        async () => {
+          // Success callback
+          try {
+            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+            resolve(downloadURL);
+          } catch (error) {
+            console.error('Error getting download URL:', error);
+            reject(error);
+          }
+        }
+      );
+    });
+
+  } catch (error) {
+    console.error('Error uploading video:', error);
+    throw error;
+  }
 }

@@ -91,17 +91,19 @@ export const RecordingProvider = ({ children,}) => {
     const handleUploadPress = async (shouldUpload) => {
       hideModal();
       if (shouldUpload && videoUri) {
-          setIsUploading(true); // Start uploading indicator
-          try {
-              const uploadUrl = await uploadVideoAsync(videoUri);
-              console.log('Uploaded video URL:', uploadUrl);
-          } catch (error) {
-              console.error('Error uploading video:', error);
-          }
+        setIsUploading(true); // Start uploading indicator
+    
+        try {
+          const uploadUrl = await uploadVideoAsync(videoUri);
+          console.log('Uploaded video URL:', uploadUrl);
+        } catch (error) {
+          console.error('Error uploading video:', error);
+        } finally {
           setIsUploading(false); // Stop uploading indicator regardless of success or failure
           setUploadFinished(true); // Indicate that upload is finished
+        }
       }
-  };
+    };
     /**
      * Shows the modal.
      */
